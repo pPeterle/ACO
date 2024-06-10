@@ -93,7 +93,7 @@ public class AntColonyOptimization
         for(int i=0;i<n-1;i++)
             sum+=randomMatrix[i][i+1];
         sum+=randomMatrix[n-1][0];
-        s+=("\nNaive solution 0-1-2-...-n-0 = "+sum+"\n");
+        s+=("\nMatrix 0-1-2-...-n-0 = "+sum+"\n");
         return randomMatrix;
     }
 
@@ -101,7 +101,7 @@ public class AntColonyOptimization
     {
         for(int i=1;i<=5;i++)
         {
-            s+=("\nAttempt #" +i);
+            s+=("\nTentaiva #" +i);
             otimizar();
             s+="\n";
         }
@@ -117,8 +117,8 @@ public class AntColonyOptimization
             atualizarFeromonioRotas();
             autalizarMelhorSolucao();
         }
-        s+=("\nBest tour length: " + (comprimentoMelhorCaminho - qtdCidades));
-        s+=("\nBest tour order: " + Arrays.toString(melhorCaminho));
+        s+=("\nMelhor caminho comprimento: " + (comprimentoMelhorCaminho - qtdCidades));
+        s+=("\nMelhor caminho ordem: " + Arrays.toString(melhorCaminho));
         return melhorCaminho.clone();
     }
     
@@ -173,7 +173,7 @@ public class AntColonyOptimization
             if (total >= r)
                 return i;
         }
-        throw new RuntimeException("There are no other cities");
+        throw new RuntimeException("Não possui outras cidades");
     }
     
     public void calcularProbabilidadeCidades(Formiga formiga)
