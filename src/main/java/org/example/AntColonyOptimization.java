@@ -20,13 +20,13 @@ import java.util.Random;
 public class AntColonyOptimization
 {
     public String s="";
-    private final double c;             //number of trails
-    private final double alpha;           //pheromone importance
-    private final double beta;            //distance priority
+    private final double c;
+    private final double alpha;
+    private final double beta;
     private final double evaporacao;
-    private final double Q;             //pheromone left on trail per ant
-    private final double qtdFormigasCidade;     //no of ants per node
-    private final double fatorAleatoriedade; //introducing randomness
+    private final double Q;
+    private final double qtdFormigasCidade;
+    private final double fatorAleatoriedade;
     
     private final int interacoesMaximas;
     
