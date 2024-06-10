@@ -59,9 +59,7 @@ public class AntColonyOptimization
             formigas.add(new Formiga(qtdCidades));
     }
     
-    /**
-     * Generate initial solution
-     */
+ 
     public double[][] gerarMatrixAleatoria(int n)
     {
         double[][] randomMatrix = new double[n][n];
@@ -98,10 +96,7 @@ public class AntColonyOptimization
         s+=("\nNaive solution 0-1-2-...-n-0 = "+sum+"\n");
         return randomMatrix;
     }
-    
-    /**
-     * Perform ant optimization
-     */
+
     public void comecarOtimizacao()
     {
         for(int i=1;i<=5;i++)
@@ -112,9 +107,6 @@ public class AntColonyOptimization
         }
     }
     
-    /**
-     * Use this method to run the main logic
-     */
     public int[] otimizar()
     {
         resetarFormigas();
@@ -130,9 +122,6 @@ public class AntColonyOptimization
         return melhorCaminho.clone();
     }
     
-    /**
-     * Prepare ants for the simulation
-     */
     private void resetarFormigas()
     {
         for(int i = 0; i< qtdFormigas; i++)
@@ -146,9 +135,6 @@ public class AntColonyOptimization
         indexAtual = 0;
     }
     
-    /**
-     * At each iteration, move ants
-     */
     private void moverFormigas()
     {
         for(int i = indexAtual; i< qtdCidades -1; i++)
@@ -161,9 +147,6 @@ public class AntColonyOptimization
         }
     }
     
-    /**
-     * Select next city for each ant
-     */
     private int selecionarProximaCidade(Formiga formiga)
     {
         int t = random.nextInt(qtdCidades - indexAtual);
@@ -193,9 +176,6 @@ public class AntColonyOptimization
         throw new RuntimeException("There are no other cities");
     }
     
-    /**
-     * Calculate the next city picks probabilites
-     */
     public void calcularProbabilidadeCidades(Formiga formiga)
     {
         int i = formiga.caminho[indexAtual];
@@ -217,9 +197,6 @@ public class AntColonyOptimization
         }
     }
     
-    /**
-     * Update trails that ants used
-     */
     private void atualizarFeromonioRotas()
     {
         for (int i = 0; i < qtdCidades; i++)
@@ -236,9 +213,6 @@ public class AntColonyOptimization
         }
     }
     
-    /**
-     * Update the best solution
-     */
     private void autalizarMelhorSolucao()
     {
         if (melhorCaminho == null)
@@ -257,9 +231,6 @@ public class AntColonyOptimization
         }
     }
     
-    /**
-     * Clear trails after simulation
-     */
     private void limparFeromonioRotas()
     {
         for(int i = 0; i< qtdCidades; i++)
