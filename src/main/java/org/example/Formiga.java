@@ -1,34 +1,43 @@
 package org.example;
 
+import java.util.ArrayList;
+
 public class Formiga {
-    protected int tamanhoCaminho;
-    protected int[] caminho;
-    protected boolean[] cidadesVisitadas;
+    protected ArrayList<Cidade> cidadesVisitadas;
     
-    public Formiga(int tourSize) {
-        this.tamanhoCaminho = tourSize;
-        this.caminho = new int[tourSize];
-        this.cidadesVisitadas = new boolean[tourSize];
+    public Formiga() {
+        cidadesVisitadas = new ArrayList<>();
     }
     
-    protected void visitarCidade(int quantasCidadesJaForamVisitadas, int cidade) {
-        caminho[quantasCidadesJaForamVisitadas] = cidade; //add to trail
-        cidadesVisitadas[cidade] = true;           //update flag
+    protected void visitarCidade(Cidade cidade) {
+        cidadesVisitadas.add(cidade);
     }
     
-    protected boolean visitouCidade(int i) {
-        return cidadesVisitadas[i];
+    protected boolean visitouCidade(String nome) {
+        for(Cidade cidade: cidadesVisitadas) {
+            if(cidade.getNome().equals(nome)) {
+                return true;
+            }
+        }
+        
+        return false;
     }
     
-    protected double distanciaPercorrida(double[][] graph) {
-        double length = graph[caminho[tamanhoCaminho - 1]][caminho[0]];
-        for (int i = 0; i < tamanhoCaminho - 1; i++)
-            length += graph[caminho[i]][caminho[i + 1]];
-        return length;
+    protected Cidade getUltimaCidade() {
+        return cidadesVisitadas.get(cidadesVisitadas.size() -1);
+    }
+    
+    protected double distanciaPercorrida() {
+        double distanciaTotal = 0;
+        for (int i = 0; i < cidadesVisitadas.size() - 1; i++) {
+            Cidade cidade = cidadesVisitadas.get(i);
+            Cidade cidade2 = cidadesVisitadas.get(i + 1);
+            distanciaTotal += cidade.calcularDistancia(cidade2);
+        }
+        return distanciaTotal;
     }
     
     protected void limpar() {
-        for (int i = 0; i < tamanhoCaminho; i++)
-            cidadesVisitadas[i] = false;
+        cidadesVisitadas = new ArrayList<>();
     }
 }
