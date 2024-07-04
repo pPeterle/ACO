@@ -42,7 +42,6 @@ public class Veiculo extends Formiga {
             if (cidade.getNome().equals(ultimaCidade.getNome())) return;
         }
         
-        
         super.visitarCidade(cidade);
         
         int itemsAEntregar = qtdCargaCidade.get(cidade.getNome());

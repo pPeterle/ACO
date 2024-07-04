@@ -14,12 +14,9 @@ import java.util.Random;
  * private double antFactor = 0.8;     //no of ants per node
  * private double randomFactor = 0.01; //introducing randomness
  * private int maxIterations = 1000;
- *
- * TODO lembrar de adicionar a volta ao inicio
  */
 
 public class AntColonyOptimization {
-    public String s = "";
     private final double alpha;
     private final double beta;
     private final double evaporacao;
@@ -33,8 +30,6 @@ public class AntColonyOptimization {
     private final ArrayList<Cidade> cidades;
     private final List<Veiculo> veiculos = new ArrayList<>();
     private final Random random = new Random();
-    
-    private int tentativaAtual;
     
     private ArrayList<Cidade> melhorCaminho;
     private double comprimentoMelhorCaminho;
@@ -59,9 +54,9 @@ public class AntColonyOptimization {
         ArrayList<Cidade> cidadeArrayList = new ArrayList<>();
         
         cidadeArrayList.add(new Cidade("Cidade1", 1, 1, 0));
-        cidadeArrayList.add(new Cidade("Cidade2", 1, 3, 5));
+        cidadeArrayList.add(new Cidade("Cidade2", 2, 2, 5));
         cidadeArrayList.add(new Cidade("Cidade3", 1, 5, 5));
-        cidadeArrayList.add(new Cidade("Cidade4", 2, 2, 5));
+        cidadeArrayList.add(new Cidade("Cidade4", 1, 3, 5));
         cidadeArrayList.add(new Cidade("Cidade5", 2, 5, 5));
         
         return cidadeArrayList;
@@ -69,31 +64,27 @@ public class AntColonyOptimization {
     
     public void comecarOtimizacao() {
         for (int i = 1; i <= interacoesMaximas; i++) {
-            tentativaAtual = i;
-            s += ("\nTentaiva #" + i);
+            System.out.println("\nTentaiva #" + i);
             otimizar();
-            s += "\n";
+            System.out.println("\n");
         }
     }
     
-    public ArrayList<Cidade> otimizar() {
+    public void otimizar() {
         resetarFormigas();
-        if(tentativaAtual % 10 == 0) {
-            limparFeromonioRotas();
-        }
+        limparFeromonioRotas();
         moverFormigas();
         atualizarFeromonioRotas();
         autalizarMelhorSolucao();
-        s += ("\nMelhor caminho comprimento: " + (comprimentoMelhorCaminho - qtdCidades));
+        System.out.println("\nMelhor caminho comprimento: " + (comprimentoMelhorCaminho - qtdCidades));
         
-        String caminho = "";
+        StringBuilder caminho = new StringBuilder();
         
         for (Cidade cidade : melhorCaminho) {
-            caminho += cidade.getNome() + " -> ";
+            caminho.append(cidade.getNome()).append(" -> ");
         }
         
-        s += ("\nMelhor caminho ordem: " + caminho);
-        return new ArrayList<>(melhorCaminho);
+        System.out.println("\nMelhor caminho ordem: " + caminho);
     }
     
     private void resetarFormigas() {
@@ -137,6 +128,7 @@ public class AntColonyOptimization {
             if (veiculo.visitouCidade(cidade.getNome())) cidade.setProbabilidade(0);
             else {
                 double numerator = Math.pow(cidadeAtual.getFeromonio(cidade.getNome()), alpha) * Math.pow(1.0 / cidadeAtual.calcularDistancia(cidade), beta);
+                //System.out.println("numerador: " + numerator + " denominador " + totalFeromonio);
                 cidade.setProbabilidade(numerator / totalFeromonio);
             }
         }
@@ -144,8 +136,11 @@ public class AntColonyOptimization {
     
     private void atualizarFeromonioRotas() {
         for (Cidade cidadeA : cidades) {
-            for (Cidade cidadeB : cidades)
-                cidadeA.setFeromonio(cidadeB.getNome(), cidadeA.getFeromonio(cidadeB.getNome()) * evaporacao);
+            for (Cidade cidadeB : cidades){
+                double feromonioAtualizado = cidadeA.getFeromonio(cidadeB.getNome()) * (1 - evaporacao);
+                cidadeA.setFeromonio(cidadeB.getNome(), feromonioAtualizado);
+            }
+            
         }
         for (Formiga formiga : veiculos) {
             double contribuicao = Q / formiga.distanciaPercorrida();
@@ -156,7 +151,6 @@ public class AntColonyOptimization {
                 if (cidadeB != null)
                     cidadeA.setFeromonio(cidadeB.getNome(), cidadeA.getFeromonio(cidadeB.getNome()) * contribuicao);
             }
-            //feromonios[formiga.caminho[qtdCidades - 1]][formiga.caminho[0]] += contribution;
         }
     }
     
