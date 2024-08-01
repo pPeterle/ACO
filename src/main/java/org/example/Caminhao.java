@@ -13,15 +13,15 @@ public class Caminhao {
     
     final int tempoDescarga = 0;
     
-    double jornadaDeTrabalhoDia1 = 9;
-    double jornadaDeTrabalhoDia2 = 9;
+    double jornadaDeTrabalhoDia1 = 600;
+    double jornadaDeTrabalhoDia2 = 600;
     
     boolean primeiroDia = true;
     
     int qtdCarga = 0;
     
     
-    ArrayList<Localidade> cidadesVisitadas;
+    public ArrayList<Localidade> cidadesVisitadas;
     
     ArrayList<Localidade> localidades;
     
@@ -55,7 +55,11 @@ public class Caminhao {
         double distanciaProxCidade = localidadeAtual.calcularDistancia(proxLocalidade);
         double distanciaVoltar = proxLocalidade.calcularDistancia(deposito);
         
-        boolean consegueRealizarEntregaNoMesmoDia = jornadaDeTrabalhoDia1 >= (((distanciaProxCidade + distanciaVoltar) * velocidadeMediaKmPorMinuto) + tempoDescarga);
+        boolean consegueRealizarEntregaNoMesmoDia = getJornadaDeTrabalhoAtual() >= (((distanciaProxCidade + distanciaVoltar) * velocidadeMediaKmPorMinuto) + tempoDescarga);
+        
+        if(!consegueRealizarEntregaNoMesmoDia) {
+            System.out.println("Não consegue entregar no mesmo dia");
+        }
         
         if (!consegueRealizarEntregaNoMesmoDia && !primeiroDia) {
             throw new RuntimeException("A entrega deve ser feita em no máximo dois dias");
@@ -119,24 +123,6 @@ public class Caminhao {
         return cidadesVisitadas.get(cidadesVisitadas.size() - 1);
     }
     
-    
-    public void resetar() {
-        
-        
-        ArrayList<Localidade> novasLocalidades = new ArrayList<>();
-        for (Localidade l : localidades) {
-            novasLocalidades.add(l.copiar());
-        }
-        
-        this.localidades = novasLocalidades;
-        this.cidadesVisitadas = new ArrayList<>();
-        this.cidadesVisitadas.add(localidades.get(0));
-        this.qtdCarga = 0;
-        this.primeiroDia = true;
-        this.jornadaDeTrabalhoDia1 = 8 * 60;
-        this.jornadaDeTrabalhoDia2 = 8 * 60;
-    }
-    
     public boolean podeVisitarCidade(Localidade proxLocalidade) {
         Localidade deposito = this.cidadesVisitadas.get(0);
         Localidade localidadeAtual = this.cidadesVisitadas.get(this.cidadesVisitadas.size() - 1);
@@ -150,7 +136,19 @@ public class Caminhao {
         
         boolean consegueRealizarEntregaNoProxDia = !primeiroDia && jornadaDeTrabalhoDia2 > ((distanciaProxCidade + distanciaVoltar) * velocidadeMediaKmPorMinuto);
         
+        if(consegueRealizarEntregaNoProxDia) {
+            System.out.println("consegeu realizar a enterga no prox dia");
+        }
+        
         return consegueRealizarEntregaNoMesmoDia || consegueRealizarEntregaNoProxDia;
+    }
+    
+    private double getJornadaDeTrabalhoAtual() {
+        if(primeiroDia) {
+            return jornadaDeTrabalhoDia1;
+        } else {
+            return jornadaDeTrabalhoDia2;
+        }
     }
     
     private void reduzirJornadaTrabalho(double minutosTrabalhados) {

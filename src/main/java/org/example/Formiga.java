@@ -64,11 +64,13 @@ public class Formiga {
     }
     
     public Localidade escolherProxCidadeAleatoria() {
+        Caminhao caminhao = caminhoes.get(caminhoes.size() - 1);
         
         ArrayList<Localidade> cidadesQueFaltamVisitar = new ArrayList<>();
         for (Localidade localidade : localidades) {
             boolean recebeuEntrega = localidade.recebeuEntrega();
-            if (!recebeuEntrega) cidadesQueFaltamVisitar.add(localidade);
+            boolean podeVisitarCidade = caminhao.podeVisitarCidade(localidade);
+            if (!recebeuEntrega && podeVisitarCidade) cidadesQueFaltamVisitar.add(localidade);
         }
         
         Random random = new Random();
@@ -111,10 +113,6 @@ public class Formiga {
         //inicia no deposito
         this.localidadesVisitadas.add(localidades.get(0).getNome());
         this.localidades = novasLocalidades;
-        
-        for (Caminhao caminhao : caminhoes) {
-            caminhao.resetar();
-        }
     }
     
     protected double distanciaPercorrida() {

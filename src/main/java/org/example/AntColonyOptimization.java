@@ -56,18 +56,20 @@ public class AntColonyOptimization {
         localidadeArrayList.add(new Localidade("Cidade1", 1, 1, 0));
         localidadeArrayList.add(new Localidade("Cidade2", 2, 2, 5));
         localidadeArrayList.add(new Localidade("Cidade3", 1, 5, 5));
-        localidadeArrayList.add(new Localidade("Cidade4", 1, 3, 5));
-        localidadeArrayList.add(new Localidade("Cidade5", 2, 5, 5));
+        localidadeArrayList.add(new Localidade("Cidade4", 6, 3, 5));
+        localidadeArrayList.add(new Localidade("Cidade5", 2, 7, 5));
         
         return localidadeArrayList;
     }
     
-    public void comecarOtimizacao() {
+    public ArrayList<Caminhao> comecarOtimizacao() {
         for (int i = 1; i <= interacoesMaximas; i++) {
             System.out.println("\nTentaiva #" + i);
             otimizar();
             System.out.println("\n");
         }
+        
+        return melhorCaminho;
     }
     
     public void otimizar() {
@@ -80,8 +82,10 @@ public class AntColonyOptimization {
         
         StringBuilder caminho = new StringBuilder();
         
-        for(int i = 0; i < melhorCaminho.size(); i++) {
-            caminho.append("\nCaminhão ").append(i).append(" Jornada de trabalho: ").append(melhorCaminho.get(i).jornadaDeTrabalhoDia1).append("\n");
+        for (int i = 0; i < melhorCaminho.size(); i++) {
+            caminho.append("\nCaminhão ").append(i).append(" Jornada de trabalho no dia 1: ")
+                    .append(melhorCaminho.get(i).jornadaDeTrabalhoDia1).append(" Jornada de trabalho no dia 2: ")
+                    .append(melhorCaminho.get(i).jornadaDeTrabalhoDia2).append("\n");
             for (Localidade localidade : melhorCaminho.get(i).cidadesVisitadas) {
                 caminho.append(localidade.getNome()).append(" -> ");
             }
@@ -100,7 +104,7 @@ public class AntColonyOptimization {
     private void moverFormigas() {
         for (Formiga formiga : formigas) {
             while (!formiga.finalizouPercurso()) {
-                boolean novoCaminhao = formiga.utilizarNovoCaminhao();
+                formiga.utilizarNovoCaminhao();
                 Localidade localidade = selecionarProximaLocalidade(formiga);
                 formiga.visitarLocalidade(localidade);
             }
@@ -153,7 +157,7 @@ public class AntColonyOptimization {
     
     private void atualizarFeromonioRotas() {
         for (Localidade localidadeA : localidades) {
-            for (Localidade localidadeB : localidades){
+            for (Localidade localidadeB : localidades) {
                 double feromonioAtualizado = localidadeA.getFeromonio(localidadeB.getNome()) * (1 - evaporacao);
                 localidadeA.setFeromonio(localidadeB.getNome(), feromonioAtualizado);
             }
@@ -161,7 +165,7 @@ public class AntColonyOptimization {
         }
         for (Formiga formiga : formigas) {
             double contribuicao = Q / formiga.distanciaPercorrida();
-            for(Caminhao caminhao: formiga.caminhoes) {
+            for (Caminhao caminhao : formiga.caminhoes) {
                 for (int i = 0; i < caminhao.cidadesVisitadas.size() - 1; i++) {
                     Localidade localidadeA = caminhao.cidadesVisitadas.get(i);
                     Localidade localidadeB = caminhao.cidadesVisitadas.get(i + 1);
