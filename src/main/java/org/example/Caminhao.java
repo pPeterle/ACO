@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.List;
 
 // JORNADA DE TRABALHO QUANDO DEVE IR PARA O PRÓXIMO DIA
 
@@ -9,12 +10,12 @@ public class Caminhao {
     
     final int velocidadeMediaKmPorMinuto = 1;
     
-    final int maxCarga = 100;
+    final int maxCarga = 120;
     
-    final int tempoDescarga = 0;
+    final int tempoDescarga = 15;
     
-    double jornadaDeTrabalhoDia1 = 600;
-    double jornadaDeTrabalhoDia2 = 600;
+    double jornadaDeTrabalhoDia1 = (8 * 60) + 30;
+    double jornadaDeTrabalhoDia2 = (8 * 60) + 30;
     
     boolean primeiroDia = true;
     
@@ -23,9 +24,9 @@ public class Caminhao {
     
     public ArrayList<Localidade> cidadesVisitadas;
     
-    ArrayList<Localidade> localidades;
+    List<Localidade> localidades;
     
-    Caminhao(ArrayList<Localidade> localidades) {
+    Caminhao(List<Localidade> localidades) {
         this.localidades = localidades;
         this.cidadesVisitadas = new ArrayList<>();
         
@@ -57,14 +58,6 @@ public class Caminhao {
         
         boolean consegueRealizarEntregaNoMesmoDia = getJornadaDeTrabalhoAtual() >= (((distanciaProxCidade + distanciaVoltar) * velocidadeMediaKmPorMinuto) + tempoDescarga);
         
-        if(!consegueRealizarEntregaNoMesmoDia) {
-            System.out.println("Não consegue entregar no mesmo dia");
-        }
-        
-        if (!consegueRealizarEntregaNoMesmoDia && !primeiroDia) {
-            throw new RuntimeException("A entrega deve ser feita em no máximo dois dias");
-        }
-        
         if (consegueRealizarEntregaNoMesmoDia) {
             // minutos do descolamento
             reduzirJornadaTrabalho(distanciaProxCidade * velocidadeMediaKmPorMinuto);
@@ -88,7 +81,10 @@ public class Caminhao {
             // Dormiu na proxima cidade
             primeiroDia = false;
             
-            reduzirJornadaTrabalho(tempoDescarga);
+            if(proxLocalidade.getQtdItensReceber() > 0) {
+                reduzirJornadaTrabalho(tempoDescarga);
+            }
+            
             
             cidadesVisitadas.add(proxLocalidade);
             
@@ -97,7 +93,11 @@ public class Caminhao {
             
             primeiroDia = false;
             reduzirJornadaTrabalho(distanciaProxCidade * velocidadeMediaKmPorMinuto);
-            reduzirJornadaTrabalho(tempoDescarga);
+            
+            if(proxLocalidade.getQtdItensReceber() > 0) {
+                reduzirJornadaTrabalho(tempoDescarga);
+            }
+            
             cidadesVisitadas.add(proxLocalidade);
         }
         
@@ -111,7 +111,7 @@ public class Caminhao {
         for (Localidade localidade : localidades) {
             if (!localidade.recebeuEntrega()) {
                 podeRealizarMaisAlgumaEntrega = podeVisitarCidade(localidade);
-                if(podeRealizarMaisAlgumaEntrega) break;
+                if (podeRealizarMaisAlgumaEntrega) break;
             }
             
         }
@@ -132,19 +132,17 @@ public class Caminhao {
         double distanciaProxCidade = localidadeAtual.calcularDistancia(proxLocalidade);
         double distanciaVoltar = proxLocalidade.calcularDistancia(deposito);
         
-        boolean consegueRealizarEntregaNoMesmoDia = primeiroDia && jornadaDeTrabalhoDia1 > ((distanciaProxCidade + distanciaVoltar) * velocidadeMediaKmPorMinuto);
+        boolean consegueRealizarEntregaNoMesmoDia = primeiroDia && jornadaDeTrabalhoDia1 > (((distanciaProxCidade + distanciaVoltar) * velocidadeMediaKmPorMinuto) + tempoDescarga) && (qtdCarga + proxLocalidade.getQtdItensReceber()) <= maxCarga;
         
-        boolean consegueRealizarEntregaNoProxDia = !primeiroDia && jornadaDeTrabalhoDia2 > ((distanciaProxCidade + distanciaVoltar) * velocidadeMediaKmPorMinuto);
+        boolean consegueRealizarEntregaNoProxDia = !primeiroDia && jornadaDeTrabalhoDia2 > (((distanciaProxCidade + distanciaVoltar) * velocidadeMediaKmPorMinuto) + tempoDescarga) && (qtdCarga + proxLocalidade.getQtdItensReceber()) <= maxCarga;
         
-        if(consegueRealizarEntregaNoProxDia) {
-            System.out.println("consegeu realizar a enterga no prox dia");
-        }
+        boolean consegueEntregarEVoltarNoProximoDia = primeiroDia && (jornadaDeTrabalhoDia1 + jornadaDeTrabalhoDia2) > (((distanciaProxCidade + distanciaVoltar) * velocidadeMediaKmPorMinuto) + tempoDescarga) && (qtdCarga + proxLocalidade.getQtdItensReceber()) <= maxCarga;
         
-        return consegueRealizarEntregaNoMesmoDia || consegueRealizarEntregaNoProxDia;
+        return consegueRealizarEntregaNoMesmoDia || consegueRealizarEntregaNoProxDia || consegueEntregarEVoltarNoProximoDia;
     }
     
     private double getJornadaDeTrabalhoAtual() {
-        if(primeiroDia) {
+        if (primeiroDia) {
             return jornadaDeTrabalhoDia1;
         } else {
             return jornadaDeTrabalhoDia2;
@@ -154,6 +152,7 @@ public class Caminhao {
     private void reduzirJornadaTrabalho(double minutosTrabalhados) {
         if (primeiroDia) {
             jornadaDeTrabalhoDia1 -= minutosTrabalhados;
+            
         } else {
             jornadaDeTrabalhoDia2 -= minutosTrabalhados;
         }

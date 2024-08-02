@@ -27,14 +27,14 @@ public class AntColonyOptimization {
     
     private final int qtdCidades;
     
-    private final ArrayList<Localidade> localidades;
+    private final List<Localidade> localidades;
     private final List<Formiga> formigas = new ArrayList<>();
     private final Random random = new Random();
     
-    private ArrayList<Caminhao> melhorCaminho;
+    private List<Caminhao> melhorCaminho;
     private double comprimentoMelhorCaminho;
     
-    public AntColonyOptimization(double alpha, double beta, double evaporacao, double q, double fatorAleatoriedade, int interacoesMaximas, int qtdFormigas) {
+    public AntColonyOptimization(double alpha, double beta, double evaporacao, double q, double fatorAleatoriedade, int interacoesMaximas, int qtdFormigas, List<Localidade> localidades) {
         this.alpha = alpha;
         this.beta = beta;
         this.evaporacao = evaporacao;
@@ -42,34 +42,44 @@ public class AntColonyOptimization {
         this.fatorAleatoriedade = fatorAleatoriedade;
         this.interacoesMaximas = interacoesMaximas;
         
-        localidades = gerarMatrixAleatoria();
+        this.localidades = localidades;
         qtdCidades = 5;
         
         for (int i = 0; i < qtdFormigas; i++)
             formigas.add(new Formiga(localidades));
     }
     
-    
-    public ArrayList<Localidade> gerarMatrixAleatoria() {
-        ArrayList<Localidade> localidadeArrayList = new ArrayList<>();
-        
-        localidadeArrayList.add(new Localidade("Cidade1", 1, 1, 0));
-        localidadeArrayList.add(new Localidade("Cidade2", 2, 2, 5));
-        localidadeArrayList.add(new Localidade("Cidade3", 1, 5, 5));
-        localidadeArrayList.add(new Localidade("Cidade4", 6, 3, 5));
-        localidadeArrayList.add(new Localidade("Cidade5", 2, 7, 5));
-        
-        return localidadeArrayList;
-    }
-    
-    public ArrayList<Caminhao> comecarOtimizacao() {
+    public List<Caminhao> comecarOtimizacao() {
         for (int i = 1; i <= interacoesMaximas; i++) {
             System.out.println("\nTentaiva #" + i);
             otimizar();
             System.out.println("\n");
         }
         
+        exibirRelatorio();
+        
         return melhorCaminho;
+    }
+    
+    public void exibirRelatorio() {
+        System.out.println("\nMelhor caminho comprimento: " + (comprimentoMelhorCaminho - qtdCidades));
+        
+        StringBuilder caminho = new StringBuilder();
+        
+        for (int i = 0; i < melhorCaminho.size(); i++) {
+            caminho.append("\nCaminhão ").append(i + 1).append("\n");
+            for (int j = 0; j < melhorCaminho.get(i).cidadesVisitadas.size(); j ++) {
+                Localidade localidade = melhorCaminho.get(i).cidadesVisitadas.get(j);
+                caminho.append(localidade.getNome());
+                
+                if(j != melhorCaminho.get(i).cidadesVisitadas.size() -1) {
+                    caminho.append(" -> ");
+                }
+            }
+        }
+        
+        
+        System.out.println("\nMelhor caminho ordem: " + caminho);
     }
     
     public void otimizar() {
@@ -78,21 +88,6 @@ public class AntColonyOptimization {
         moverFormigas();
         atualizarFeromonioRotas();
         autalizarMelhorSolucao();
-        System.out.println("\nMelhor caminho comprimento: " + (comprimentoMelhorCaminho - qtdCidades));
-        
-        StringBuilder caminho = new StringBuilder();
-        
-        for (int i = 0; i < melhorCaminho.size(); i++) {
-            caminho.append("\nCaminhão ").append(i).append(" Jornada de trabalho no dia 1: ")
-                    .append(melhorCaminho.get(i).jornadaDeTrabalhoDia1).append(" Jornada de trabalho no dia 2: ")
-                    .append(melhorCaminho.get(i).jornadaDeTrabalhoDia2).append("\n");
-            for (Localidade localidade : melhorCaminho.get(i).cidadesVisitadas) {
-                caminho.append(localidade.getNome()).append(" -> ");
-            }
-        }
-        
-        
-        System.out.println("\nMelhor caminho ordem: " + caminho);
     }
     
     private void resetarFormigas() {

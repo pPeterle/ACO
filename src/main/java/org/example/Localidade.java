@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Localidade {
-    final private int x;
-    final private int y;
+    final private double x;
+    final private double y;
     final private String nome;
     final private int qtdItensReceber;
     private Map<String, Double> feromonios;
@@ -16,7 +16,7 @@ public class Localidade {
     
     private boolean recebeuEntrega = false;
     
-    public Localidade(String cityName, int x, int y, int qtdItensReceber) {
+    public Localidade(String cityName, double x, double y, int qtdItensReceber) {
         this.nome = cityName;
         this.x = x;
         this.y = y;
@@ -25,11 +25,11 @@ public class Localidade {
         this.qtdItensReceber = qtdItensReceber;
     }
     
-    public int getX() {
+    public double getX() {
         return x;
     }
     
-    public int getY() {
+    public double getY() {
         return y;
     }
     
@@ -65,10 +65,27 @@ public class Localidade {
     public double calcularDistancia(Localidade proxLocalidade) {
         if (proxLocalidade == null) return 0;
         
-        Double distanciaX = Math.pow(proxLocalidade.getX() - getX(), 2);
-        Double distanciaY = Math.pow(proxLocalidade.getY() - getY(), 2);
+        return distance(getX(), proxLocalidade.getX(), getY(), proxLocalidade.getY(), 0, 0) / 1000;
+    }
+    
+    private double distance(double lat1, double lat2, double lon1,
+                                  double lon2, double el1, double el2) {
         
-        return Math.sqrt(distanciaX + distanciaY);
+        final int R = 6371; // Radius of the earth
+        
+        double latDistance = Math.toRadians(lat2 - lat1);
+        double lonDistance = Math.toRadians(lon2 - lon1);
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double distance = R * c * 1000; // convert to meters
+        
+        double height = el1 - el2;
+        
+        distance = Math.pow(distance, 2) + Math.pow(height, 2);
+        
+        return Math.sqrt(distance);
     }
     
     public boolean recebeuEntrega() {

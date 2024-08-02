@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -21,8 +22,8 @@ public class PanAndZoom {
     AffineTransform at;   // the current pan and zoom transform
     Point2D XFormedPoint; // storage for a transformed mouse point
     
-    ArrayList<Caminhao> caminhoes;
-    ArrayList<Localidade> localidades;
+    List<Caminhao> caminhoes;
+    List<Localidade> localidades;
     
     public String[] mColors = {
             "#39add1", // light blue
@@ -40,7 +41,7 @@ public class PanAndZoom {
             "#b7c0c7"  // light gray
     };
     
-    public PanAndZoom(ArrayList<Caminhao> caminhoes, ArrayList<Localidade> localidades) {
+    public PanAndZoom(List<Caminhao> caminhoes, List<Localidade> localidades) {
         this.caminhoes = caminhoes;
         this.localidades = localidades;
         JFrame frame = new JFrame();
@@ -72,8 +73,8 @@ public class PanAndZoom {
         double scale;
         
         PanAndZoomCanvas() {
-            translateX = 0;
-            translateY = 0;
+            translateX =  4463.328092993274;
+            translateY = 9245.847651467619;
             scale = 1;
         }
         
@@ -109,13 +110,14 @@ public class PanAndZoom {
             
             // draw the objects
             ourGraphics.setColor(Color.BLACK);
+            ourGraphics.setFont(new Font("TimesRoman", Font.PLAIN, 10));
             
             for (int i = 0; i < caminhoes.size(); i ++) {
                 Caminhao caminhao = caminhoes.get(i);
                 Polygon polygon = new Polygon();
                 for (int j = 0; j < caminhao.cidadesVisitadas.size(); j++) {
                     Localidade localidade = caminhao.cidadesVisitadas.get(j);
-                    polygon.addPoint(localidade.getX() * 100, localidade.getY() * 100);
+                    polygon.addPoint((int) (localidade.getX() * 200), (int) (localidade.getY() * 200));
                     
                 }
                 
@@ -124,26 +126,20 @@ public class PanAndZoom {
                 ourGraphics.fill(polygon);
                 
                 ourGraphics.setColor(Color.BLACK);
-                Rectangle bounds = polygon.getBounds();
-
-                int x = (int) Math.round(((bounds.getX() + bounds.width) / 2));
-                int y = (int) Math.round(((bounds.getY() + bounds.height) / 2));
-
-                ourGraphics.drawString("Caminhão " + (i + 1), x, y);
                 
                 for (int j = 1; j < caminhao.cidadesVisitadas.size(); j++) {
                     Localidade l1 = caminhao.cidadesVisitadas.get(j -1);
                     Localidade l2 = caminhao.cidadesVisitadas.get(j);
                     
-                    drawArrowLine(ourGraphics, l1.getX() * 100, l1.getY() * 100, l2.getX() * 100, l2.getY() * 100, 10, 10);
+                    drawArrowLine(ourGraphics, (int) (l1.getX() * 200), (int) (l1.getY() * 200), (int) (l2.getX() * 200), (int) (l2.getY() * 200), 1, 1);
                     
                 }
                 
             }
             
             for (Localidade localidade : localidades) {
-                ourGraphics.fillOval(localidade.getX() * 100, localidade.getY() * 100, 10, 10);
-                ourGraphics.drawString(localidade.getNome(), localidade.getX() * 100, localidade.getY() * 100);
+                ourGraphics.fillOval((int) (localidade.getX() * 200),(int)  (localidade.getY() * 200), 10, 10);
+                ourGraphics.drawString(localidade.getNome(), (int) (localidade.getX() * 200), (int) (localidade.getY() * 200));
             }
             
             // make sure you restore the original transform or else the drawing
