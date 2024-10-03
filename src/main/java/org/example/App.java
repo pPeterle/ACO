@@ -29,7 +29,7 @@ public class App {
             
             
             
-            AntColonyOptimization aco = new AntColonyOptimization(1.0, 5, 0.9, 5, 0.01, 10000, 30, localidadeArrayList);
+            AntColonyOptimization aco = new AntColonyOptimization(1.0, 5, 0.9, 5, 0.01, 1000, 30, localidadeArrayList);
             
             Instant start = Instant.now();
             
