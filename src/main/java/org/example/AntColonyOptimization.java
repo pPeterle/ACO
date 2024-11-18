@@ -67,15 +67,17 @@ public class AntColonyOptimization {
         StringBuilder caminho = new StringBuilder();
         
         for (int i = 0; i < melhorCaminho.size(); i++) {
+            Caminhao caminhao = melhorCaminho.get(i);
             caminho.append("\nCaminhão ").append(i + 1).append("\n");
-            for (int j = 0; j < melhorCaminho.get(i).cidadesVisitadas.size(); j ++) {
-                Localidade localidade = melhorCaminho.get(i).cidadesVisitadas.get(j);
-                caminho.append(localidade.getNome());
-                
-                if(j != melhorCaminho.get(i).cidadesVisitadas.size() -1) {
-                    caminho.append(" -> ");
-                }
-            }
+            caminho.append(caminhao.historico);
+//            for (int j = 0; j < melhorCaminho.get(i).cidadesVisitadas.size(); j ++) {
+//                Localidade localidade = melhorCaminho.get(i).cidadesVisitadas.get(j);
+//                caminho.append(localidade.getNome());
+//
+//                if(j != melhorCaminho.get(i).cidadesVisitadas.size() -1) {
+//                    caminho.append(" -> ");
+//                }
+//            }
         }
         
         
