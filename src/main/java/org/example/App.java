@@ -22,19 +22,19 @@ public class App {
             
             List<Localidade> localidadeArrayList = localidadesString.stream()
                     .skip(1)
-                    .map(item -> new Localidade(item[0], Double.parseDouble(item[1]), Double.parseDouble(item[2]), Integer.parseInt(item[3])))
+                    .map(item -> new Localidade(item[0], Double.parseDouble(item[1]), Double.parseDouble(item[2]), Integer.parseInt(item[3]), false))
                     .toList();
 
             CSVReader hoteisCsv = new CSVReaderBuilder(new FileReader("src/main/files/Hoteis.csv")).build();
             List<String[]> hoteisString = hoteisCsv.readAll();
 
-            List<Localidade> hoteisArrayList = localidadesString.stream()
+            List<Localidade> hoteisArrayList = hoteisString.stream()
                     .skip(1)
-                    .map(item -> new Localidade(item[0], Double.parseDouble(item[1]), Double.parseDouble(item[2]), Integer.parseInt(item[3])))
+                    .map(item -> new Localidade(item[1], Double.parseDouble(item[3]), Double.parseDouble(item[4]), 0, true))
                     .toList();
 
             
-            AntColonyOptimization aco = new AntColonyOptimization(1.0, 5, 0.9, 5, 0.01, 100, 30, localidadeArrayList);
+            AntColonyOptimization aco = new AntColonyOptimization(1.0, 5, 0.9, 5, 0.01, 10000, 200, localidadeArrayList, hoteisArrayList);
             
             Instant start = Instant.now();
             
@@ -44,7 +44,7 @@ public class App {
             System.out.println(Duration.between(start, end).getSeconds());
             javax.swing.SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    new PanAndZoom(melhorCaminho, localidadeArrayList);
+                    new PanAndZoom(melhorCaminho, localidadeArrayList, hoteisArrayList);
                 }
             });
         } catch (Exception e) {

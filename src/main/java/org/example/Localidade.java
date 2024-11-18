@@ -7,6 +7,7 @@ public class Localidade {
     final private double x;
     final private double y;
     final private String nome;
+    final private Boolean hotel;
     final private int qtdItensReceber;
     private Map<String, Double> feromonios;
     
@@ -16,13 +17,14 @@ public class Localidade {
     
     private boolean recebeuEntrega = false;
     
-    public Localidade(String cityName, double x, double y, int qtdItensReceber) {
+    public Localidade(String cityName, double x, double y, int qtdItensReceber, boolean hotel) {
         this.nome = cityName;
         this.x = x;
         this.y = y;
         feromonios = new HashMap<>();
         probabilidade = 0d;
         this.qtdItensReceber = qtdItensReceber;
+        this.hotel = hotel;
     }
     
     public double getX() {
@@ -72,6 +74,7 @@ public class Localidade {
                                   double lon2, double el1, double el2) {
         
         final int R = 6371; // Radius of the earth
+        final double weight = 1.1;
         
         double latDistance = Math.toRadians(lat2 - lat1);
         double lonDistance = Math.toRadians(lon2 - lon1);
@@ -85,7 +88,7 @@ public class Localidade {
         
         distance = Math.pow(distance, 2) + Math.pow(height, 2);
         
-        return Math.sqrt(distance);
+        return Math.sqrt(distance) * weight;
     }
     
     public boolean recebeuEntrega() {
@@ -103,7 +106,7 @@ public class Localidade {
     }
     
     public Localidade copiar() {
-        return new Localidade(nome, x, y, qtdItensReceber);
+        return new Localidade(nome, x, y, qtdItensReceber, hotel);
     }
     
     

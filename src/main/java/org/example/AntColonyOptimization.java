@@ -1,5 +1,7 @@
 package org.example;
 
+import me.tongfei.progressbar.ProgressBar;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -34,7 +36,7 @@ public class AntColonyOptimization {
     private List<Caminhao> melhorCaminho;
     private double comprimentoMelhorCaminho;
     
-    public AntColonyOptimization(double alpha, double beta, double evaporacao, double q, double fatorAleatoriedade, int interacoesMaximas, int qtdFormigas, List<Localidade> localidades) {
+    public AntColonyOptimization(double alpha, double beta, double evaporacao, double q, double fatorAleatoriedade, int interacoesMaximas, int qtdFormigas, List<Localidade> localidades, List<Localidade> hoteis) {
         this.alpha = alpha;
         this.beta = beta;
         this.evaporacao = evaporacao;
@@ -46,14 +48,15 @@ public class AntColonyOptimization {
         qtdCidades = 5;
         
         for (int i = 0; i < qtdFormigas; i++)
-            formigas.add(new Formiga(localidades));
+            formigas.add(new Formiga(localidades, hoteis));
     }
     
     public List<Caminhao> comecarOtimizacao() {
+        ProgressBar pb = new ProgressBar("Iterações", interacoesMaximas);
+        pb.start();
         for (int i = 1; i <= interacoesMaximas; i++) {
-            System.out.println("\nTentaiva #" + i);
+            pb.step();
             otimizar();
-            System.out.println("\n");
         }
         
         exibirRelatorio();
@@ -129,7 +132,7 @@ public class AntColonyOptimization {
         
         //System.out.println(possiveisLocalidades.toString());
         
-        throw new RuntimeException("Não possui outras cidades");
+        throw new RuntimeException("Não possui outras cidades " + possiveisLocalidades.size());
     }
     
     public void calcularProbabilidadeCidades(Formiga formiga, List<Localidade> possiveisLocalidades) {

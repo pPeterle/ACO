@@ -8,13 +8,16 @@ public class Formiga {
     public ArrayList<Caminhao> caminhoes;
     
     public List<Localidade> localidades;
+
+    public  List<Localidade> hoteis;
     
     public Set<String> localidadesVisitadas;
     
-    Formiga(List<Localidade> localidades) {
+    Formiga(List<Localidade> localidades, List<Localidade> hoteis) {
         this.localidades = new ArrayList<>();
         this.caminhoes = new ArrayList<>();
         this.localidadesVisitadas = new HashSet<>();
+        this.hoteis = hoteis;
         
         //inicia no deposito
         this.localidadesVisitadas.add(localidades.get(0).getNome());
@@ -48,7 +51,7 @@ public class Formiga {
     
     public boolean utilizarNovoCaminhao() {
         if (this.caminhoes.isEmpty()) {
-            this.caminhoes.add(new Caminhao(localidades));
+            this.caminhoes.add(new Caminhao(localidades, hoteis));
             
             return true;
         }
@@ -63,7 +66,7 @@ public class Formiga {
             throw new RuntimeException("Gerando caminhão infinitos");
         }
         
-        this.caminhoes.add(new Caminhao(localidades));
+        this.caminhoes.add(new Caminhao(localidades, hoteis));
         return true;
     }
     

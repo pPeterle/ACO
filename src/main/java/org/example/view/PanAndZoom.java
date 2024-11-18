@@ -24,7 +24,8 @@ public class PanAndZoom {
     
     List<Caminhao> caminhoes;
     List<Localidade> localidades;
-    
+    List<Localidade> hoteis;
+
     public String[] mColors = {
             "#39add1", // light blue
             "#3079ab", // dark blue
@@ -41,9 +42,10 @@ public class PanAndZoom {
             "#b7c0c7"  // light gray
     };
     
-    public PanAndZoom(List<Caminhao> caminhoes, List<Localidade> localidades) {
+    public PanAndZoom(List<Caminhao> caminhoes, List<Localidade> localidades, List<Localidade> hoteis) {
         this.caminhoes = caminhoes;
         this.localidades = localidades;
+        this.hoteis = hoteis;
         JFrame frame = new JFrame();
         canvas = new PanAndZoomCanvas();
         PanningHandler panner = new PanningHandler();
@@ -141,7 +143,12 @@ public class PanAndZoom {
                 ourGraphics.fillOval((int) (localidade.getX() * 200),(int)  (localidade.getY() * 200), 10, 10);
                 ourGraphics.drawString(localidade.getNome(), (int) (localidade.getX() * 200), (int) (localidade.getY() * 200));
             }
-            
+
+//            for (Localidade localidade : hoteis) {
+//                ourGraphics.fillOval((int) (localidade.getX() * 200),(int)  (localidade.getY() * 200), 10, 10);
+//                ourGraphics.drawString("Hotel em  " + localidade.getNome(), (int) (localidade.getX() * 200), (int) (localidade.getY() * 200));
+//            }
+
             // make sure you restore the original transform or else the drawing
             // of borders and other components might be messed up
             ourGraphics.setTransform(saveTransform);
