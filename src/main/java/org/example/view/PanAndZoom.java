@@ -137,7 +137,7 @@ public class PanAndZoom {
                 
             }
             
-            for (Localidade localidade : localidades) {
+            for (Localidade localidade : localidades.stream().filter(localidade -> !localidade.recebeuEntrega()).toList()) {
                 ourGraphics.fillOval((int) (localidade.getX() * 200),(int)  (localidade.getY() * 200), 10, 10);
                 ourGraphics.drawString(localidade.getNome(), (int) (localidade.getX() * 200), (int) (localidade.getY() * 200));
             }

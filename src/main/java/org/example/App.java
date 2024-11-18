@@ -17,19 +17,24 @@ public class App {
     public static void main(String[] args) {
         try {
             
-            CSVReader reader = new CSVReaderBuilder(new FileReader("src/main/files/Demanda.csv")).build();
-            List<String[]> myEntries = reader.readAll();
+            CSVReader localidadesFile = new CSVReaderBuilder(new FileReader("src/main/files/Demanda.csv")).build();
+            List<String[]> localidadesString = localidadesFile.readAll();
             
-            List<Localidade> localidadeArrayList = myEntries.stream()
+            List<Localidade> localidadeArrayList = localidadesString.stream()
                     .skip(1)
                     .map(item -> new Localidade(item[0], Double.parseDouble(item[1]), Double.parseDouble(item[2]), Integer.parseInt(item[3])))
                     .toList();
+
+            CSVReader hoteisCsv = new CSVReaderBuilder(new FileReader("src/main/files/Hoteis.csv")).build();
+            List<String[]> hoteisString = hoteisCsv.readAll();
+
+            List<Localidade> hoteisArrayList = localidadesString.stream()
+                    .skip(1)
+                    .map(item -> new Localidade(item[0], Double.parseDouble(item[1]), Double.parseDouble(item[2]), Integer.parseInt(item[3])))
+                    .toList();
+
             
-            System.out.println(localidadeArrayList.size());
-            
-            
-            
-            AntColonyOptimization aco = new AntColonyOptimization(1.0, 5, 0.9, 5, 0.01, 10000, 30, localidadeArrayList);
+            AntColonyOptimization aco = new AntColonyOptimization(1.0, 5, 0.9, 5, 0.01, 100, 30, localidadeArrayList);
             
             Instant start = Instant.now();
             
