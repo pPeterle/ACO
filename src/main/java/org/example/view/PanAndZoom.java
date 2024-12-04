@@ -1,12 +1,11 @@
 package org.example.view;
 
-import org.example.Caminhao;
-import org.example.Localidade;
+import org.example.modelos.Caminhao;
+import org.example.modelos.Localidade;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComponent;

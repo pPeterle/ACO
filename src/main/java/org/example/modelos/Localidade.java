@@ -1,7 +1,8 @@
-package org.example;
+package org.example.modelos;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Localidade {
     final private double x;
@@ -10,11 +11,9 @@ public class Localidade {
     final private Boolean hotel;
     final private int qtdItensReceber;
     private Map<String, Double> feromonios;
+    public boolean dormiu;
     
-    private Double probabilidade;
-    
-    
-    
+
     private boolean recebeuEntrega = false;
     
     public Localidade(String cityName, double x, double y, int qtdItensReceber, boolean hotel) {
@@ -22,7 +21,6 @@ public class Localidade {
         this.x = x;
         this.y = y;
         feromonios = new HashMap<>();
-        probabilidade = 0d;
         this.qtdItensReceber = qtdItensReceber;
         this.hotel = hotel;
     }
@@ -53,15 +51,6 @@ public class Localidade {
     
     public void setFeromonio(String nomeCidade, double feromonio) {
         this.feromonios.put(nomeCidade, feromonio);
-    }
-    
-    public Double getProbabilidade() {
-        
-        return probabilidade;
-    }
-    
-    public void setProbabilidade(double probabilidade) {
-        this.probabilidade = probabilidade;
     }
     
     public double calcularDistancia(Localidade proxLocalidade) {
@@ -108,6 +97,18 @@ public class Localidade {
     public Localidade copiar() {
         return new Localidade(nome, x, y, qtdItensReceber, hotel);
     }
-    
-    
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Localidade that = (Localidade) o;
+        return Double.compare(x, that.x) == 0 && Double.compare(y, that.y) == 0 && qtdItensReceber == that.qtdItensReceber && recebeuEntrega == that.recebeuEntrega && Objects.equals(nome, that.nome) && Objects.equals(hotel, that.hotel) && Objects.equals(feromonios, that.feromonios);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y, nome, hotel, qtdItensReceber, feromonios, recebeuEntrega);
+    }
 }

@@ -1,6 +1,7 @@
 package org.example;
 
 import me.tongfei.progressbar.ProgressBar;
+import org.example.modelos.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,15 +27,16 @@ public class AntColonyOptimization {
     private final double fatorAleatoriedade;
     
     private final int interacoesMaximas;
-    
-    private final int qtdCidades;
+
+    private static final int custoCaminhao = 15000;
+    private static final double custoPoKm = 1.1;
     
     private final List<Localidade> localidades;
     private final List<Formiga> formigas = new ArrayList<>();
     private final Random random = new Random();
     
     private List<Caminhao> melhorCaminho;
-    private double comprimentoMelhorCaminho;
+    private double custoMelhorCaminho;
     
     public AntColonyOptimization(double alpha, double beta, double evaporacao, double q, double fatorAleatoriedade, int interacoesMaximas, int qtdFormigas, List<Localidade> localidades, List<Localidade> hoteis) {
         this.alpha = alpha;
@@ -45,7 +47,6 @@ public class AntColonyOptimization {
         this.interacoesMaximas = interacoesMaximas;
         
         this.localidades = localidades;
-        qtdCidades = 5;
         
         for (int i = 0; i < qtdFormigas; i++)
             formigas.add(new Formiga(localidades, hoteis));
@@ -58,6 +59,7 @@ public class AntColonyOptimization {
             pb.step();
             otimizar();
         }
+        pb.stop();
         
         exibirRelatorio();
         
@@ -65,25 +67,17 @@ public class AntColonyOptimization {
     }
     
     public void exibirRelatorio() {
-        System.out.println("\nMelhor caminho comprimento: " + (comprimentoMelhorCaminho - qtdCidades));
         
         StringBuilder caminho = new StringBuilder();
         
         for (int i = 0; i < melhorCaminho.size(); i++) {
             Caminhao caminhao = melhorCaminho.get(i);
             caminho.append("\nCaminhão ").append(i + 1).append("\n");
-            caminho.append(caminhao.historico);
-//            for (int j = 0; j < melhorCaminho.get(i).cidadesVisitadas.size(); j ++) {
-//                Localidade localidade = melhorCaminho.get(i).cidadesVisitadas.get(j);
-//                caminho.append(localidade.getNome());
-//
-//                if(j != melhorCaminho.get(i).cidadesVisitadas.size() -1) {
-//                    caminho.append(" -> ");
-//                }
-//            }
+            caminho.append(caminhao.getHistorico());
         }
-        
-        
+
+        caminho.append("\n").append("CUSTO TOTAL: ").append(custoMelhorCaminho);
+
         System.out.println("\nMelhor caminho ordem: " + caminho);
     }
     
@@ -105,52 +99,51 @@ public class AntColonyOptimization {
         for (Formiga formiga : formigas) {
             while (!formiga.finalizouPercurso()) {
                 formiga.utilizarNovoCaminhao();
-                Localidade localidade = selecionarProximaLocalidade(formiga);
-                formiga.visitarLocalidade(localidade);
+                Viagem viagem = selecionarProximaViagem(formiga);
+                formiga.visitarLocalidade(viagem);
             }
             
         }
     }
     
-    private Localidade selecionarProximaLocalidade(Formiga formiga) {
-        if (formiga.getUltimoCaminhao().podeVoltarDeposito()) return localidades.get(0);
+    private Viagem selecionarProximaViagem(Formiga formiga) {
+        if (formiga.getUltimoCaminhao().podeVoltarDeposito()) return new Viagem(localidades.get(0), TipoViagem.VIAGEM_ENTRE_CIDADES);
         
         if (random.nextDouble() < fatorAleatoriedade) {
             return formiga.escolherProxCidadeAleatoria();
         }
         
-        List<Localidade> possiveisLocalidades = formiga.getPossiveisLocalidadesParaVisitar();
+        List<Viagem> possiveisLocalidades = formiga.getPossiveisLocalidadesParaVisitar();
         
         calcularProbabilidadeCidades(formiga, possiveisLocalidades);
         double r = random.nextDouble();
         Double total = 0d;
-        for (Localidade localidade : possiveisLocalidades) {
-            total += localidade.getProbabilidade();
-            //System.out.println("Probabilidade: " + total);
-            if (total >= r) return localidade;
+        for (Viagem viagem : possiveisLocalidades) {
+            total += viagem.getProbabilidade();
+            if (total >= r) return viagem;
         }
-        
-        //System.out.println(possiveisLocalidades.toString());
         
         throw new RuntimeException("Não possui outras cidades " + possiveisLocalidades.size());
     }
     
-    public void calcularProbabilidadeCidades(Formiga formiga, List<Localidade> possiveisLocalidades) {
+    public void calcularProbabilidadeCidades(Formiga formiga, List<Viagem> possiveisViagens) {
         Localidade localidadeAtual = formiga.getUltimoCaminhao().getUltimaLocalidade();
         double totalFeromonio = 0.0;
-        for (Localidade localidade : possiveisLocalidades) {
+        for (Viagem viagem : possiveisViagens) {
+            Localidade localidade = viagem.localidade;
             if (!formiga.visitouLocalidade(localidade)) {
                 Double feromonio = localidadeAtual.getFeromonio(localidade.getNome());
                 double distancia = localidadeAtual.calcularDistancia(localidade);
                 totalFeromonio += Math.pow(feromonio, alpha) * Math.pow(1.0 / distancia, beta);
             }
         }
-        for (Localidade localidade : possiveisLocalidades) {
-            if (formiga.visitouLocalidade(localidade)) localidade.setProbabilidade(0);
+        for (Viagem viagem : possiveisViagens) {
+            Localidade localidade = viagem.localidade;
+            if (formiga.visitouLocalidade(localidade)) viagem.setProbabilidade(0d);
             else {
                 double numerator = Math.pow(localidadeAtual.getFeromonio(localidade.getNome()), alpha) * Math.pow(1.0 / localidadeAtual.calcularDistancia(localidade), beta);
                 //System.out.println("numerador: " + numerator + " denominador " + totalFeromonio);
-                localidade.setProbabilidade(numerator / totalFeromonio);
+                viagem.setProbabilidade(numerator / totalFeromonio);
             }
         }
     }
@@ -180,15 +173,20 @@ public class AntColonyOptimization {
     private void autalizarMelhorSolucao() {
         if (melhorCaminho == null || melhorCaminho.isEmpty()) {
             melhorCaminho = formigas.get(0).caminhoes;
-            comprimentoMelhorCaminho = formigas.get(0).distanciaPercorrida();
+            custoMelhorCaminho = calcularCusto(formigas.get(0));
         }
         
         for (Formiga formiga : formigas) {
-            if (formiga.distanciaPercorrida() < comprimentoMelhorCaminho) {
-                comprimentoMelhorCaminho = formiga.distanciaPercorrida();
+            double custo = calcularCusto(formiga);
+            if (custo < custoMelhorCaminho) {
+                custoMelhorCaminho = custo;
                 melhorCaminho = new ArrayList<>(formiga.caminhoes);
             }
         }
+    }
+
+    public static double calcularCusto(Formiga formiga) {
+        return (formiga.distanciaPercorrida() * custoPoKm) + (formiga.caminhoes.size() * custoCaminhao) ;
     }
     
     private void limparFeromonioRotas() {

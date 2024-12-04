@@ -1,4 +1,4 @@
-package org.example;
+package org.example.modelos;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -13,7 +13,7 @@ public class Formiga {
     
     public Set<String> localidadesVisitadas;
     
-    Formiga(List<Localidade> localidades, List<Localidade> hoteis) {
+    public Formiga(List<Localidade> localidades, List<Localidade> hoteis) {
         this.localidades = new ArrayList<>();
         this.caminhoes = new ArrayList<>();
         this.localidadesVisitadas = new HashSet<>();
@@ -62,7 +62,7 @@ public class Formiga {
         
         if (!deposito.getNome().equals(ultimaLocalidade.getNome())) return false;
         
-        if(ultimoCaminhao.qtdCarga == 0) {
+        if(ultimoCaminhao.getQtdCarga() == 0) {
             throw new RuntimeException("Gerando caminhão infinitos");
         }
         
@@ -70,38 +70,42 @@ public class Formiga {
         return true;
     }
     
-    public Localidade escolherProxCidadeAleatoria() {
+    public Viagem escolherProxCidadeAleatoria() {
         Caminhao caminhao = caminhoes.get(caminhoes.size() - 1);
         
-        ArrayList<Localidade> cidadesQueFaltamVisitar = new ArrayList<>();
+        ArrayList<Viagem> possiveisViagens = new ArrayList<>();
         for (Localidade localidade : localidades) {
             boolean recebeuEntrega = localidade.recebeuEntrega();
-            boolean podeVisitarCidade = caminhao.podeVisitarCidade(localidade);
-            if (!recebeuEntrega && podeVisitarCidade) cidadesQueFaltamVisitar.add(localidade);
+            Viagem viagem = caminhao.podeVisitarCidade(localidade);
+            boolean podeVisitarCidade = viagem.tipoViagem != TipoViagem.IMPOSSIVEL;
+            if (!recebeuEntrega && podeVisitarCidade) possiveisViagens.add(viagem);
         }
         
         Random random = new Random();
-        return cidadesQueFaltamVisitar.get(random.nextInt(cidadesQueFaltamVisitar.size()));
+        return possiveisViagens.get(random.nextInt(possiveisViagens.size()));
     }
     
-    public void visitarLocalidade(Localidade localidade) {
+    public void visitarLocalidade(Viagem viagem) {
         Caminhao ultimoCaminhao = getUltimoCaminhao();
-        localidadesVisitadas.add(localidade.getNome());
+        localidadesVisitadas.add(viagem.localidade.getNome());
         for (Localidade l : localidades) {
-            if (l.getNome().equals(localidade.getNome())) l.setRecebeuEntrega(true);
+            if (l.getNome().equals(viagem.localidade.getNome())) l.setRecebeuEntrega(true);
         }
-        ultimoCaminhao.visitarLocalidade(localidade);
+        ultimoCaminhao.visitarLocalidade(viagem);
     }
     
     public boolean visitouLocalidade(Localidade localidade) {
         return localidadesVisitadas.contains(localidade.getNome());
     }
     
-    public List<Localidade> getPossiveisLocalidadesParaVisitar() {
-        // verificar quais restricoes para visitar cidades
+    public List<Viagem> getPossiveisLocalidadesParaVisitar() {
         Caminhao caminhao = caminhoes.get(caminhoes.size() - 1);
         return localidades.stream()
-                .filter(localidade -> !localidade.recebeuEntrega() && caminhao.podeVisitarCidade(localidade))
+                .filter(localidade -> !localidade.recebeuEntrega())
+                .map(caminhao::podeVisitarCidade)
+                .filter(viagem ->
+                    viagem.tipoViagem != TipoViagem.IMPOSSIVEL
+                )
                 .collect(Collectors.toList());
     }
     
@@ -122,7 +126,7 @@ public class Formiga {
         this.localidades = novasLocalidades;
     }
     
-    protected double distanciaPercorrida() {
+    public double distanciaPercorrida() {
         double distanciaTotal = 0;
         for (Caminhao caminhao : caminhoes) {
             for (int i = 0; i < caminhao.cidadesVisitadas.size() - 1; i++) {
