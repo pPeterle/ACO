@@ -48,9 +48,9 @@ public class App {
                     (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
 
             List<Callable<Resultado>> tasks = new ArrayList<>();
-            for (double i = 0; i < 5; i += 0.1) {
+            for (double i = 0; i < 10; i += 0.1) {
 
-                AntColonyOptimization aco = new AntColonyOptimization(1.0 + i, 1.5 + (i * 1.5), 0.9, 1000, 0.01, 1000, 100, localidadeArrayList, hoteisArrayList);
+                AntColonyOptimization aco = new AntColonyOptimization(1.0 + i, 1.0 + (i * 1.5), 0.85, 1000, 0.05, 10000, 200, localidadeArrayList, hoteisArrayList);
                 double finalI = i;
                 tasks.add(new Callable<Resultado>() {
                     @Override
