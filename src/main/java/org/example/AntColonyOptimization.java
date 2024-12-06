@@ -28,8 +28,8 @@ public class AntColonyOptimization {
     
     private final int interacoesMaximas;
 
-    private static final int custoCaminhao = 15000;
-    private static final double custoPoKm = 1.1;
+    public static final int custoCaminhao = 15000;
+    public static final double custoPoKm = 1.1;
     
     private final List<Localidade> localidades;
     private final List<Formiga> formigas = new ArrayList<>();
@@ -51,8 +51,8 @@ public class AntColonyOptimization {
         for (int i = 0; i < qtdFormigas; i++)
             formigas.add(new Formiga(localidades, hoteis));
     }
-    
-    public List<Caminhao> comecarOtimizacao() {
+
+    public double comecarOtimizacao() {
         ProgressBar pb = new ProgressBar("Iterações", interacoesMaximas);
         pb.start();
         for (int i = 1; i <= interacoesMaximas; i++) {
@@ -63,22 +63,22 @@ public class AntColonyOptimization {
         
         exibirRelatorio();
         
-        return melhorCaminho;
+        return custoMelhorCaminho;
     }
     
     public void exibirRelatorio() {
         
-        StringBuilder caminho = new StringBuilder();
-        
-        for (int i = 0; i < melhorCaminho.size(); i++) {
-            Caminhao caminhao = melhorCaminho.get(i);
-            caminho.append("\nCaminhão ").append(i + 1).append("\n");
-            caminho.append(caminhao.getHistorico());
-        }
-
-        caminho.append("\n").append("CUSTO TOTAL: ").append(custoMelhorCaminho);
-
-        System.out.println("\nMelhor caminho ordem: " + caminho);
+//        StringBuilder caminho = new StringBuilder();
+//
+//        for (int i = 0; i < melhorCaminho.size(); i++) {
+//            Caminhao caminhao = melhorCaminho.get(i);
+//            caminho.append("\nCaminhão ").append(i + 1).append("\n");
+//            caminho.append(caminhao.getHistorico());
+//        }
+//
+//        caminho.append("\n").append("CUSTO TOTAL: ").append(custoMelhorCaminho);
+//
+//        System.out.println("\nMelhor caminho ordem: " + caminho);
     }
     
     public void otimizar() {

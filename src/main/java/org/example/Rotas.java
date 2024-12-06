@@ -59,8 +59,19 @@ public class Rotas {
                     });
 
 
-            System.out.println("Resultado: ");
+            double distanciaTotal = 0d;
+            for (ArrayList<Localidade> rotas: caminhoes) {
+                for (int i = 0; i < rotas.size() - 1; i++) {
+                    Localidade localidade = rotas.get(i);
+                    Localidade localidade2 = rotas.get(i + 1);
+                    distanciaTotal += localidade.calcularDistancia(localidade2);
+                }
+            }
+            Double total = (distanciaTotal * AntColonyOptimization.custoPoKm) + ((caminhoes.size() -1) * AntColonyOptimization.custoCaminhao);
+            System.out.printf("Resultado: %.3f", total);
+
             System.out.println(caminhoes.size());
+            System.out.println(caminhoes.get(caminhoes.size() -1).size());
 
 
 
