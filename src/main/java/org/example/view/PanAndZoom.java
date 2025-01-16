@@ -1,6 +1,6 @@
 package org.example.view;
 
-import org.example.modelos.Caminhao;
+import org.example.modelos.Formiga;
 import org.example.modelos.Localidade;
 
 import java.awt.*;
@@ -21,7 +21,7 @@ public class PanAndZoom {
     AffineTransform at;   // the current pan and zoom transform
     Point2D XFormedPoint; // storage for a transformed mouse point
     
-    List<Caminhao> caminhoes;
+    List<Formiga> caminhoes;
     List<Localidade> localidades;
     List<Localidade> hoteis;
 
@@ -41,7 +41,7 @@ public class PanAndZoom {
             "#b7c0c7"  // light gray
     };
     
-    public PanAndZoom(List<Caminhao> caminhoes, List<Localidade> localidades, List<Localidade> hoteis) {
+    public PanAndZoom(List<Formiga> caminhoes, List<Localidade> localidades, List<Localidade> hoteis) {
         this.caminhoes = caminhoes;
         this.localidades = localidades;
         this.hoteis = hoteis;
@@ -114,10 +114,10 @@ public class PanAndZoom {
             ourGraphics.setFont(new Font("TimesRoman", Font.PLAIN, 10));
             
             for (int i = 0; i < caminhoes.size(); i ++) {
-                Caminhao caminhao = caminhoes.get(i);
+                Formiga formiga = caminhoes.get(i);
                 Polygon polygon = new Polygon();
-                for (int j = 0; j < caminhao.cidadesVisitadas.size(); j++) {
-                    Localidade localidade = caminhao.cidadesVisitadas.get(j);
+                for (int j = 0; j < formiga.cidadesVisitadas.size(); j++) {
+                    Localidade localidade = formiga.cidadesVisitadas.get(j);
                     polygon.addPoint((int) (localidade.getX() * 200), (int) (localidade.getY() * 200));
                     
                 }
@@ -128,9 +128,9 @@ public class PanAndZoom {
                 
                 ourGraphics.setColor(Color.BLACK);
                 
-                for (int j = 1; j < caminhao.cidadesVisitadas.size(); j++) {
-                    Localidade l1 = caminhao.cidadesVisitadas.get(j -1);
-                    Localidade l2 = caminhao.cidadesVisitadas.get(j);
+                for (int j = 1; j < formiga.cidadesVisitadas.size(); j++) {
+                    Localidade l1 = formiga.cidadesVisitadas.get(j -1);
+                    Localidade l2 = formiga.cidadesVisitadas.get(j);
                     
                     drawArrowLine(ourGraphics, (int) (l1.getX() * 200), (int) (l1.getY() * 200), (int) (l2.getX() * 200), (int) (l2.getY() * 200), 1, 1);
                     

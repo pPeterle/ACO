@@ -128,51 +128,51 @@
             </kml:IconStyle>
         </kml:Style>
         <kml:Style/>
-        <kml:Style id="style_icon_sleep">
-            <kml:IconStyle>
-                <kml:color>ff000000</kml:color>
-                <kml:scale>1.0</kml:scale>
-                <kml:heading>0.0</kml:heading>
-            </kml:IconStyle>
-        </kml:Style>
-        <kml:Style/>
-        <kml:Style id="style_icon_sleep">
-            <kml:IconStyle>
-                <kml:color>ff000000</kml:color>
-                <kml:scale>1.0</kml:scale>
-                <kml:heading>0.0</kml:heading>
-            </kml:IconStyle>
-        </kml:Style>
-        <kml:Style/>
-        <kml:Style id="style_icon_sleep">
-            <kml:IconStyle>
-                <kml:color>ff000000</kml:color>
-                <kml:scale>1.0</kml:scale>
-                <kml:heading>0.0</kml:heading>
-            </kml:IconStyle>
-        </kml:Style>
-        <kml:Style/>
-        <kml:Style id="style_icon_sleep">
-            <kml:IconStyle>
-                <kml:color>ff000000</kml:color>
-                <kml:scale>1.0</kml:scale>
-                <kml:heading>0.0</kml:heading>
-            </kml:IconStyle>
-        </kml:Style>
-        <kml:Style/>
-        <kml:Style id="style_icon_sleep">
-            <kml:IconStyle>
-                <kml:color>ff000000</kml:color>
-                <kml:scale>1.0</kml:scale>
-                <kml:heading>0.0</kml:heading>
-            </kml:IconStyle>
-        </kml:Style>
-        <kml:Style/>
         <kml:Style id="style_1">
             <kml:PolyStyle>
                 <kml:color>8f3079ab</kml:color>
             </kml:PolyStyle>
         </kml:Style>
+        <kml:Style id="style_icon_sleep">
+            <kml:IconStyle>
+                <kml:color>ff000000</kml:color>
+                <kml:scale>1.0</kml:scale>
+                <kml:heading>0.0</kml:heading>
+            </kml:IconStyle>
+        </kml:Style>
+        <kml:Style/>
+        <kml:Style id="style_icon_sleep">
+            <kml:IconStyle>
+                <kml:color>ff000000</kml:color>
+                <kml:scale>1.0</kml:scale>
+                <kml:heading>0.0</kml:heading>
+            </kml:IconStyle>
+        </kml:Style>
+        <kml:Style/>
+        <kml:Style id="style_icon_sleep">
+            <kml:IconStyle>
+                <kml:color>ff000000</kml:color>
+                <kml:scale>1.0</kml:scale>
+                <kml:heading>0.0</kml:heading>
+            </kml:IconStyle>
+        </kml:Style>
+        <kml:Style/>
+        <kml:Style id="style_icon_sleep">
+            <kml:IconStyle>
+                <kml:color>ff000000</kml:color>
+                <kml:scale>1.0</kml:scale>
+                <kml:heading>0.0</kml:heading>
+            </kml:IconStyle>
+        </kml:Style>
+        <kml:Style/>
+        <kml:Style id="style_icon_sleep">
+            <kml:IconStyle>
+                <kml:color>ff000000</kml:color>
+                <kml:scale>1.0</kml:scale>
+                <kml:heading>0.0</kml:heading>
+            </kml:IconStyle>
+        </kml:Style>
+        <kml:Style/>
         <kml:Style id="style_icon_sleep">
             <kml:IconStyle>
                 <kml:color>ff000000</kml:color>
@@ -420,11 +420,35 @@
             </kml:IconStyle>
         </kml:Style>
         <kml:Style/>
+        <kml:Style id="style_icon_sleep">
+            <kml:IconStyle>
+                <kml:color>ff000000</kml:color>
+                <kml:scale>1.0</kml:scale>
+                <kml:heading>0.0</kml:heading>
+            </kml:IconStyle>
+        </kml:Style>
+        <kml:Style/>
         <kml:Style id="style_5">
             <kml:PolyStyle>
                 <kml:color>8f838cc7</kml:color>
             </kml:PolyStyle>
         </kml:Style>
+        <kml:Style id="style_icon_sleep">
+            <kml:IconStyle>
+                <kml:color>ff000000</kml:color>
+                <kml:scale>1.0</kml:scale>
+                <kml:heading>0.0</kml:heading>
+            </kml:IconStyle>
+        </kml:Style>
+        <kml:Style/>
+        <kml:Style id="style_icon_sleep">
+            <kml:IconStyle>
+                <kml:color>ff000000</kml:color>
+                <kml:scale>1.0</kml:scale>
+                <kml:heading>0.0</kml:heading>
+            </kml:IconStyle>
+        </kml:Style>
+        <kml:Style/>
         <kml:Style id="style_icon_sleep">
             <kml:IconStyle>
                 <kml:color>ff000000</kml:color>
@@ -497,10 +521,10 @@
                 </kml:Point>
             </kml:Placemark>
             <kml:Placemark>
-                <kml:name>CONTAGEM</kml:name>
+                <kml:name>CONFINS</kml:name>
                 <kml:LookAt>
-                    <kml:longitude>-44.056373</kml:longitude>
-                    <kml:latitude>-19.928242</kml:latitude>
+                    <kml:longitude>-43.98983281730939</kml:longitude>
+                    <kml:latitude>-19.62909581641355</kml:latitude>
                     <kml:altitude>0.0</kml:altitude>
                     <kml:heading>0.0</kml:heading>
                     <kml:tilt>0.0</kml:tilt>
@@ -508,22 +532,7 @@
                 </kml:LookAt>
                 <kml:styleUrl>#style_icon_</kml:styleUrl>
                 <kml:Point>
-                    <kml:coordinates>-44.056373,-19.928242</kml:coordinates>
-                </kml:Point>
-            </kml:Placemark>
-            <kml:Placemark>
-                <kml:name>VESPASIANO</kml:name>
-                <kml:LookAt>
-                    <kml:longitude>-43.938543</kml:longitude>
-                    <kml:latitude>-19.752473</kml:latitude>
-                    <kml:altitude>0.0</kml:altitude>
-                    <kml:heading>0.0</kml:heading>
-                    <kml:tilt>0.0</kml:tilt>
-                    <kml:range>0.0</kml:range>
-                </kml:LookAt>
-                <kml:styleUrl>#style_icon_</kml:styleUrl>
-                <kml:Point>
-                    <kml:coordinates>-43.938543,-19.752473</kml:coordinates>
+                    <kml:coordinates>-43.98983281730939,-19.62909581641355</kml:coordinates>
                 </kml:Point>
             </kml:Placemark>
             <kml:Placemark>
@@ -557,6 +566,186 @@
                 </kml:Point>
             </kml:Placemark>
             <kml:Placemark>
+                <kml:name>VESPASIANO</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-43.938543</kml:longitude>
+                    <kml:latitude>-19.752473</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-43.938543,-19.752473</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
+                <kml:name>JOAO MONLEVADE</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-43.177918</kml:longitude>
+                    <kml:latitude>-19.815919</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-43.177918,-19.815919</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
+                <kml:name>IPATINGA</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-42.561654</kml:longitude>
+                    <kml:latitude>-19.465223</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-42.561654,-19.465223</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
+                <kml:name>CARATINGA</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-42.146049</kml:longitude>
+                    <kml:latitude>-19.784807</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_sleep</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-42.146049,-19.784807</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
+                <kml:name>MANHUACU</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-42.036065</kml:longitude>
+                    <kml:latitude>-20.255943</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-42.036065,-20.255943</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
+                <kml:name>VICOSA</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-42.882204</kml:longitude>
+                    <kml:latitude>-20.7619</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-42.882204,-20.7619</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
+                <kml:name>UBA</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-42.940615</kml:longitude>
+                    <kml:latitude>-21.113764</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-42.940615,-21.113764</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
+                <kml:name>BARBACENA</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-43.770892</kml:longitude>
+                    <kml:latitude>-21.220864</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-43.770892,-21.220864</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
+                <kml:name>CONSELHEIRO LAFAIETE</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-43.795272</kml:longitude>
+                    <kml:latitude>-20.656509</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-43.795272,-20.656509</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
+                <kml:name>CONGONHAS</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-43.856644</kml:longitude>
+                    <kml:latitude>-20.500174</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-43.856644,-20.500174</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
+                <kml:name>DEPÓSITO</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-44.08277811534257</kml:longitude>
+                    <kml:latitude>-19.83176041393988</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-44.08277811534257,-19.83176041393988</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
+                <kml:name>DEPÓSITO</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-44.08277811534257</kml:longitude>
+                    <kml:latitude>-19.83176041393988</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-44.08277811534257,-19.83176041393988</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
                 <kml:name>PARA DE MINAS</kml:name>
                 <kml:LookAt>
                     <kml:longitude>-44.595105</kml:longitude>
@@ -569,21 +758,6 @@
                 <kml:styleUrl>#style_icon_</kml:styleUrl>
                 <kml:Point>
                     <kml:coordinates>-44.595105,-19.868746</kml:coordinates>
-                </kml:Point>
-            </kml:Placemark>
-            <kml:Placemark>
-                <kml:name>ITAUNA</kml:name>
-                <kml:LookAt>
-                    <kml:longitude>-44.584163</kml:longitude>
-                    <kml:latitude>-20.082297</kml:latitude>
-                    <kml:altitude>0.0</kml:altitude>
-                    <kml:heading>0.0</kml:heading>
-                    <kml:tilt>0.0</kml:tilt>
-                    <kml:range>0.0</kml:range>
-                </kml:LookAt>
-                <kml:styleUrl>#style_icon_</kml:styleUrl>
-                <kml:Point>
-                    <kml:coordinates>-44.584163,-20.082297</kml:coordinates>
                 </kml:Point>
             </kml:Placemark>
             <kml:Placemark>
@@ -617,10 +791,10 @@
                 </kml:Point>
             </kml:Placemark>
             <kml:Placemark>
-                <kml:name>SANTO ANTONIO DO MONTE</kml:name>
+                <kml:name>BOM DESPACHO</kml:name>
                 <kml:LookAt>
-                    <kml:longitude>-45.285895</kml:longitude>
-                    <kml:latitude>-20.090039</kml:latitude>
+                    <kml:longitude>-45.27829</kml:longitude>
+                    <kml:latitude>-19.744152</kml:latitude>
                     <kml:altitude>0.0</kml:altitude>
                     <kml:heading>0.0</kml:heading>
                     <kml:tilt>0.0</kml:tilt>
@@ -628,7 +802,7 @@
                 </kml:LookAt>
                 <kml:styleUrl>#style_icon_</kml:styleUrl>
                 <kml:Point>
-                    <kml:coordinates>-45.285895,-20.090039</kml:coordinates>
+                    <kml:coordinates>-45.27829,-19.744152</kml:coordinates>
                 </kml:Point>
             </kml:Placemark>
             <kml:Placemark>
@@ -656,24 +830,9 @@
                     <kml:tilt>0.0</kml:tilt>
                     <kml:range>0.0</kml:range>
                 </kml:LookAt>
-                <kml:styleUrl>#style_icon_sleep</kml:styleUrl>
-                <kml:Point>
-                    <kml:coordinates>-45.532763,-20.28994</kml:coordinates>
-                </kml:Point>
-            </kml:Placemark>
-            <kml:Placemark>
-                <kml:name>PIUMHI</kml:name>
-                <kml:LookAt>
-                    <kml:longitude>-45.968624</kml:longitude>
-                    <kml:latitude>-20.470962</kml:latitude>
-                    <kml:altitude>0.0</kml:altitude>
-                    <kml:heading>0.0</kml:heading>
-                    <kml:tilt>0.0</kml:tilt>
-                    <kml:range>0.0</kml:range>
-                </kml:LookAt>
                 <kml:styleUrl>#style_icon_</kml:styleUrl>
                 <kml:Point>
-                    <kml:coordinates>-45.968624,-20.470962</kml:coordinates>
+                    <kml:coordinates>-45.532763,-20.28994</kml:coordinates>
                 </kml:Point>
             </kml:Placemark>
             <kml:Placemark>
@@ -686,9 +845,24 @@
                     <kml:tilt>0.0</kml:tilt>
                     <kml:range>0.0</kml:range>
                 </kml:LookAt>
-                <kml:styleUrl>#style_icon_</kml:styleUrl>
+                <kml:styleUrl>#style_icon_sleep</kml:styleUrl>
                 <kml:Point>
                     <kml:coordinates>-45.279292,-20.890602</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
+                <kml:name>TRES PONTAS</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-45.51467</kml:longitude>
+                    <kml:latitude>-21.37295</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-45.51467,-21.37295</kml:coordinates>
                 </kml:Point>
             </kml:Placemark>
             <kml:Placemark>
@@ -707,10 +881,10 @@
                 </kml:Point>
             </kml:Placemark>
             <kml:Placemark>
-                <kml:name>TRES PONTAS</kml:name>
+                <kml:name>ALFENAS</kml:name>
                 <kml:LookAt>
-                    <kml:longitude>-45.51467</kml:longitude>
-                    <kml:latitude>-21.37295</kml:latitude>
+                    <kml:longitude>-45.947245</kml:longitude>
+                    <kml:latitude>-21.414451</kml:latitude>
                     <kml:altitude>0.0</kml:altitude>
                     <kml:heading>0.0</kml:heading>
                     <kml:tilt>0.0</kml:tilt>
@@ -718,7 +892,22 @@
                 </kml:LookAt>
                 <kml:styleUrl>#style_icon_</kml:styleUrl>
                 <kml:Point>
-                    <kml:coordinates>-45.51467,-21.37295</kml:coordinates>
+                    <kml:coordinates>-45.947245,-21.414451</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
+                <kml:name>VARGINHA</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-45.436898</kml:longitude>
+                    <kml:latitude>-21.563785</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-45.436898,-21.563785</kml:coordinates>
                 </kml:Point>
             </kml:Placemark>
             <kml:Placemark>
@@ -797,10 +986,10 @@
                 </kml:Point>
             </kml:Placemark>
             <kml:Placemark>
-                <kml:name>JOAO MONLEVADE</kml:name>
+                <kml:name>SANTO ANTONIO DO MONTE</kml:name>
                 <kml:LookAt>
-                    <kml:longitude>-43.177918</kml:longitude>
-                    <kml:latitude>-19.815919</kml:latitude>
+                    <kml:longitude>-45.285895</kml:longitude>
+                    <kml:latitude>-20.090039</kml:latitude>
                     <kml:altitude>0.0</kml:altitude>
                     <kml:heading>0.0</kml:heading>
                     <kml:tilt>0.0</kml:tilt>
@@ -808,14 +997,14 @@
                 </kml:LookAt>
                 <kml:styleUrl>#style_icon_</kml:styleUrl>
                 <kml:Point>
-                    <kml:coordinates>-43.177918,-19.815919</kml:coordinates>
+                    <kml:coordinates>-45.285895,-20.090039</kml:coordinates>
                 </kml:Point>
             </kml:Placemark>
             <kml:Placemark>
-                <kml:name>PONTE NOVA</kml:name>
+                <kml:name>PIUMHI</kml:name>
                 <kml:LookAt>
-                    <kml:longitude>-42.889429</kml:longitude>
-                    <kml:latitude>-20.414808</kml:latitude>
+                    <kml:longitude>-45.95858929418302</kml:longitude>
+                    <kml:latitude>-20.470692269595915</kml:latitude>
                     <kml:altitude>0.0</kml:altitude>
                     <kml:heading>0.0</kml:heading>
                     <kml:tilt>0.0</kml:tilt>
@@ -823,172 +1012,7 @@
                 </kml:LookAt>
                 <kml:styleUrl>#style_icon_</kml:styleUrl>
                 <kml:Point>
-                    <kml:coordinates>-42.889429,-20.414808</kml:coordinates>
-                </kml:Point>
-            </kml:Placemark>
-            <kml:Placemark>
-                <kml:name>VICOSA</kml:name>
-                <kml:LookAt>
-                    <kml:longitude>-42.882204</kml:longitude>
-                    <kml:latitude>-20.7619</kml:latitude>
-                    <kml:altitude>0.0</kml:altitude>
-                    <kml:heading>0.0</kml:heading>
-                    <kml:tilt>0.0</kml:tilt>
-                    <kml:range>0.0</kml:range>
-                </kml:LookAt>
-                <kml:styleUrl>#style_icon_</kml:styleUrl>
-                <kml:Point>
-                    <kml:coordinates>-42.882204,-20.7619</kml:coordinates>
-                </kml:Point>
-            </kml:Placemark>
-            <kml:Placemark>
-                <kml:name>MURIAE</kml:name>
-                <kml:LookAt>
-                    <kml:longitude>-42.370869</kml:longitude>
-                    <kml:latitude>-21.143023</kml:latitude>
-                    <kml:altitude>0.0</kml:altitude>
-                    <kml:heading>0.0</kml:heading>
-                    <kml:tilt>0.0</kml:tilt>
-                    <kml:range>0.0</kml:range>
-                </kml:LookAt>
-                <kml:styleUrl>#style_icon_sleep</kml:styleUrl>
-                <kml:Point>
-                    <kml:coordinates>-42.370869,-21.143023</kml:coordinates>
-                </kml:Point>
-            </kml:Placemark>
-            <kml:Placemark>
-                <kml:name>CATAGUASES</kml:name>
-                <kml:LookAt>
-                    <kml:longitude>-42.697721</kml:longitude>
-                    <kml:latitude>-21.380665</kml:latitude>
-                    <kml:altitude>0.0</kml:altitude>
-                    <kml:heading>0.0</kml:heading>
-                    <kml:tilt>0.0</kml:tilt>
-                    <kml:range>0.0</kml:range>
-                </kml:LookAt>
-                <kml:styleUrl>#style_icon_</kml:styleUrl>
-                <kml:Point>
-                    <kml:coordinates>-42.697721,-21.380665</kml:coordinates>
-                </kml:Point>
-            </kml:Placemark>
-            <kml:Placemark>
-                <kml:name>UBA</kml:name>
-                <kml:LookAt>
-                    <kml:longitude>-42.940615</kml:longitude>
-                    <kml:latitude>-21.113764</kml:latitude>
-                    <kml:altitude>0.0</kml:altitude>
-                    <kml:heading>0.0</kml:heading>
-                    <kml:tilt>0.0</kml:tilt>
-                    <kml:range>0.0</kml:range>
-                </kml:LookAt>
-                <kml:styleUrl>#style_icon_</kml:styleUrl>
-                <kml:Point>
-                    <kml:coordinates>-42.940615,-21.113764</kml:coordinates>
-                </kml:Point>
-            </kml:Placemark>
-            <kml:Placemark>
-                <kml:name>JUIZ DE FORA</kml:name>
-                <kml:LookAt>
-                    <kml:longitude>-43.355926</kml:longitude>
-                    <kml:latitude>-21.757239</kml:latitude>
-                    <kml:altitude>0.0</kml:altitude>
-                    <kml:heading>0.0</kml:heading>
-                    <kml:tilt>0.0</kml:tilt>
-                    <kml:range>0.0</kml:range>
-                </kml:LookAt>
-                <kml:styleUrl>#style_icon_</kml:styleUrl>
-                <kml:Point>
-                    <kml:coordinates>-43.355926,-21.757239</kml:coordinates>
-                </kml:Point>
-            </kml:Placemark>
-            <kml:Placemark>
-                <kml:name>BARBACENA</kml:name>
-                <kml:LookAt>
-                    <kml:longitude>-43.770892</kml:longitude>
-                    <kml:latitude>-21.220864</kml:latitude>
-                    <kml:altitude>0.0</kml:altitude>
-                    <kml:heading>0.0</kml:heading>
-                    <kml:tilt>0.0</kml:tilt>
-                    <kml:range>0.0</kml:range>
-                </kml:LookAt>
-                <kml:styleUrl>#style_icon_</kml:styleUrl>
-                <kml:Point>
-                    <kml:coordinates>-43.770892,-21.220864</kml:coordinates>
-                </kml:Point>
-            </kml:Placemark>
-            <kml:Placemark>
-                <kml:name>CONSELHEIRO LAFAIETE</kml:name>
-                <kml:LookAt>
-                    <kml:longitude>-43.795272</kml:longitude>
-                    <kml:latitude>-20.656509</kml:latitude>
-                    <kml:altitude>0.0</kml:altitude>
-                    <kml:heading>0.0</kml:heading>
-                    <kml:tilt>0.0</kml:tilt>
-                    <kml:range>0.0</kml:range>
-                </kml:LookAt>
-                <kml:styleUrl>#style_icon_</kml:styleUrl>
-                <kml:Point>
-                    <kml:coordinates>-43.795272,-20.656509</kml:coordinates>
-                </kml:Point>
-            </kml:Placemark>
-            <kml:Placemark>
-                <kml:name>DEPÓSITO</kml:name>
-                <kml:LookAt>
-                    <kml:longitude>-44.08277811534257</kml:longitude>
-                    <kml:latitude>-19.83176041393988</kml:latitude>
-                    <kml:altitude>0.0</kml:altitude>
-                    <kml:heading>0.0</kml:heading>
-                    <kml:tilt>0.0</kml:tilt>
-                    <kml:range>0.0</kml:range>
-                </kml:LookAt>
-                <kml:styleUrl>#style_icon_</kml:styleUrl>
-                <kml:Point>
-                    <kml:coordinates>-44.08277811534257,-19.83176041393988</kml:coordinates>
-                </kml:Point>
-            </kml:Placemark>
-            <kml:Placemark>
-                <kml:name>DEPÓSITO</kml:name>
-                <kml:LookAt>
-                    <kml:longitude>-44.08277811534257</kml:longitude>
-                    <kml:latitude>-19.83176041393988</kml:latitude>
-                    <kml:altitude>0.0</kml:altitude>
-                    <kml:heading>0.0</kml:heading>
-                    <kml:tilt>0.0</kml:tilt>
-                    <kml:range>0.0</kml:range>
-                </kml:LookAt>
-                <kml:styleUrl>#style_icon_</kml:styleUrl>
-                <kml:Point>
-                    <kml:coordinates>-44.08277811534257,-19.83176041393988</kml:coordinates>
-                </kml:Point>
-            </kml:Placemark>
-            <kml:Placemark>
-                <kml:name>BOM DESPACHO</kml:name>
-                <kml:LookAt>
-                    <kml:longitude>-45.27829</kml:longitude>
-                    <kml:latitude>-19.744152</kml:latitude>
-                    <kml:altitude>0.0</kml:altitude>
-                    <kml:heading>0.0</kml:heading>
-                    <kml:tilt>0.0</kml:tilt>
-                    <kml:range>0.0</kml:range>
-                </kml:LookAt>
-                <kml:styleUrl>#style_icon_</kml:styleUrl>
-                <kml:Point>
-                    <kml:coordinates>-45.27829,-19.744152</kml:coordinates>
-                </kml:Point>
-            </kml:Placemark>
-            <kml:Placemark>
-                <kml:name>ALFENAS</kml:name>
-                <kml:LookAt>
-                    <kml:longitude>-45.947245</kml:longitude>
-                    <kml:latitude>-21.414451</kml:latitude>
-                    <kml:altitude>0.0</kml:altitude>
-                    <kml:heading>0.0</kml:heading>
-                    <kml:tilt>0.0</kml:tilt>
-                    <kml:range>0.0</kml:range>
-                </kml:LookAt>
-                <kml:styleUrl>#style_icon_sleep</kml:styleUrl>
-                <kml:Point>
-                    <kml:coordinates>-45.947245,-21.414451</kml:coordinates>
+                    <kml:coordinates>-45.95858929418302,-20.470692269595915</kml:coordinates>
                 </kml:Point>
             </kml:Placemark>
             <kml:Placemark>
@@ -1001,7 +1025,7 @@
                     <kml:tilt>0.0</kml:tilt>
                     <kml:range>0.0</kml:range>
                 </kml:LookAt>
-                <kml:styleUrl>#style_icon_</kml:styleUrl>
+                <kml:styleUrl>#style_icon_sleep</kml:styleUrl>
                 <kml:Point>
                     <kml:coordinates>-45.921966,-21.678517</kml:coordinates>
                 </kml:Point>
@@ -1037,10 +1061,10 @@
                 </kml:Point>
             </kml:Placemark>
             <kml:Placemark>
-                <kml:name>VARGINHA</kml:name>
+                <kml:name>ITAUNA</kml:name>
                 <kml:LookAt>
-                    <kml:longitude>-45.436898</kml:longitude>
-                    <kml:latitude>-21.563785</kml:latitude>
+                    <kml:longitude>-44.584163</kml:longitude>
+                    <kml:latitude>-20.082297</kml:latitude>
                     <kml:altitude>0.0</kml:altitude>
                     <kml:heading>0.0</kml:heading>
                     <kml:tilt>0.0</kml:tilt>
@@ -1048,7 +1072,7 @@
                 </kml:LookAt>
                 <kml:styleUrl>#style_icon_</kml:styleUrl>
                 <kml:Point>
-                    <kml:coordinates>-45.436898,-21.563785</kml:coordinates>
+                    <kml:coordinates>-44.584163,-20.082297</kml:coordinates>
                 </kml:Point>
             </kml:Placemark>
             <kml:Placemark>
@@ -1079,96 +1103,6 @@
                 <kml:styleUrl>#style_icon_</kml:styleUrl>
                 <kml:Point>
                     <kml:coordinates>-44.08277811534257,-19.83176041393988</kml:coordinates>
-                </kml:Point>
-            </kml:Placemark>
-            <kml:Placemark>
-                <kml:name>CURVELO</kml:name>
-                <kml:LookAt>
-                    <kml:longitude>-44.435624</kml:longitude>
-                    <kml:latitude>-18.762314</kml:latitude>
-                    <kml:altitude>0.0</kml:altitude>
-                    <kml:heading>0.0</kml:heading>
-                    <kml:tilt>0.0</kml:tilt>
-                    <kml:range>0.0</kml:range>
-                </kml:LookAt>
-                <kml:styleUrl>#style_icon_</kml:styleUrl>
-                <kml:Point>
-                    <kml:coordinates>-44.435624,-18.762314</kml:coordinates>
-                </kml:Point>
-            </kml:Placemark>
-            <kml:Placemark>
-                <kml:name>BOCAIUVA</kml:name>
-                <kml:LookAt>
-                    <kml:longitude>-43.810984</kml:longitude>
-                    <kml:latitude>-17.116635</kml:latitude>
-                    <kml:altitude>0.0</kml:altitude>
-                    <kml:heading>0.0</kml:heading>
-                    <kml:tilt>0.0</kml:tilt>
-                    <kml:range>0.0</kml:range>
-                </kml:LookAt>
-                <kml:styleUrl>#style_icon_sleep</kml:styleUrl>
-                <kml:Point>
-                    <kml:coordinates>-43.810984,-17.116635</kml:coordinates>
-                </kml:Point>
-            </kml:Placemark>
-            <kml:Placemark>
-                <kml:name>MONTES CLAROS</kml:name>
-                <kml:LookAt>
-                    <kml:longitude>-43.857647</kml:longitude>
-                    <kml:latitude>-16.731606</kml:latitude>
-                    <kml:altitude>0.0</kml:altitude>
-                    <kml:heading>0.0</kml:heading>
-                    <kml:tilt>0.0</kml:tilt>
-                    <kml:range>0.0</kml:range>
-                </kml:LookAt>
-                <kml:styleUrl>#style_icon_</kml:styleUrl>
-                <kml:Point>
-                    <kml:coordinates>-43.857647,-16.731606</kml:coordinates>
-                </kml:Point>
-            </kml:Placemark>
-            <kml:Placemark>
-                <kml:name>DEPÓSITO</kml:name>
-                <kml:LookAt>
-                    <kml:longitude>-44.08277811534257</kml:longitude>
-                    <kml:latitude>-19.83176041393988</kml:latitude>
-                    <kml:altitude>0.0</kml:altitude>
-                    <kml:heading>0.0</kml:heading>
-                    <kml:tilt>0.0</kml:tilt>
-                    <kml:range>0.0</kml:range>
-                </kml:LookAt>
-                <kml:styleUrl>#style_icon_</kml:styleUrl>
-                <kml:Point>
-                    <kml:coordinates>-44.08277811534257,-19.83176041393988</kml:coordinates>
-                </kml:Point>
-            </kml:Placemark>
-            <kml:Placemark>
-                <kml:name>DEPÓSITO</kml:name>
-                <kml:LookAt>
-                    <kml:longitude>-44.08277811534257</kml:longitude>
-                    <kml:latitude>-19.83176041393988</kml:latitude>
-                    <kml:altitude>0.0</kml:altitude>
-                    <kml:heading>0.0</kml:heading>
-                    <kml:tilt>0.0</kml:tilt>
-                    <kml:range>0.0</kml:range>
-                </kml:LookAt>
-                <kml:styleUrl>#style_icon_</kml:styleUrl>
-                <kml:Point>
-                    <kml:coordinates>-44.08277811534257,-19.83176041393988</kml:coordinates>
-                </kml:Point>
-            </kml:Placemark>
-            <kml:Placemark>
-                <kml:name>IPATINGA</kml:name>
-                <kml:LookAt>
-                    <kml:longitude>-42.561654</kml:longitude>
-                    <kml:latitude>-19.465223</kml:latitude>
-                    <kml:altitude>0.0</kml:altitude>
-                    <kml:heading>0.0</kml:heading>
-                    <kml:tilt>0.0</kml:tilt>
-                    <kml:range>0.0</kml:range>
-                </kml:LookAt>
-                <kml:styleUrl>#style_icon_</kml:styleUrl>
-                <kml:Point>
-                    <kml:coordinates>-42.561654,-19.465223</kml:coordinates>
                 </kml:Point>
             </kml:Placemark>
             <kml:Placemark>
@@ -1202,10 +1136,10 @@
                 </kml:Point>
             </kml:Placemark>
             <kml:Placemark>
-                <kml:name>DEPÓSITO</kml:name>
+                <kml:name>TIMOTEO</kml:name>
                 <kml:LookAt>
-                    <kml:longitude>-44.08277811534257</kml:longitude>
-                    <kml:latitude>-19.83176041393988</kml:latitude>
+                    <kml:longitude>-42.640778184641924</kml:longitude>
+                    <kml:latitude>-19.54509047412781</kml:latitude>
                     <kml:altitude>0.0</kml:altitude>
                     <kml:heading>0.0</kml:heading>
                     <kml:tilt>0.0</kml:tilt>
@@ -1213,7 +1147,7 @@
                 </kml:LookAt>
                 <kml:styleUrl>#style_icon_</kml:styleUrl>
                 <kml:Point>
-                    <kml:coordinates>-44.08277811534257,-19.83176041393988</kml:coordinates>
+                    <kml:coordinates>-42.640778184641924,-19.54509047412781</kml:coordinates>
                 </kml:Point>
             </kml:Placemark>
             <kml:Placemark>
@@ -1232,10 +1166,10 @@
                 </kml:Point>
             </kml:Placemark>
             <kml:Placemark>
-                <kml:name>MANHUACU</kml:name>
+                <kml:name>DEPÓSITO</kml:name>
                 <kml:LookAt>
-                    <kml:longitude>-42.036065</kml:longitude>
-                    <kml:latitude>-20.255943</kml:latitude>
+                    <kml:longitude>-44.08277811534257</kml:longitude>
+                    <kml:latitude>-19.83176041393988</kml:latitude>
                     <kml:altitude>0.0</kml:altitude>
                     <kml:heading>0.0</kml:heading>
                     <kml:tilt>0.0</kml:tilt>
@@ -1243,7 +1177,142 @@
                 </kml:LookAt>
                 <kml:styleUrl>#style_icon_</kml:styleUrl>
                 <kml:Point>
-                    <kml:coordinates>-42.036065,-20.255943</kml:coordinates>
+                    <kml:coordinates>-44.08277811534257,-19.83176041393988</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
+                <kml:name>PONTE NOVA</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-42.889429</kml:longitude>
+                    <kml:latitude>-20.414808</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-42.889429,-20.414808</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
+                <kml:name>MURIAE</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-42.370869</kml:longitude>
+                    <kml:latitude>-21.143023</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_sleep</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-42.370869,-21.143023</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
+                <kml:name>CATAGUASES</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-42.697721</kml:longitude>
+                    <kml:latitude>-21.380665</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-42.697721,-21.380665</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
+                <kml:name>JUIZ DE FORA</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-43.355926</kml:longitude>
+                    <kml:latitude>-21.757239</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-43.355926,-21.757239</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
+                <kml:name>DEPÓSITO</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-44.08277811534257</kml:longitude>
+                    <kml:latitude>-19.83176041393988</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-44.08277811534257,-19.83176041393988</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
+                <kml:name>DEPÓSITO</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-44.08277811534257</kml:longitude>
+                    <kml:latitude>-19.83176041393988</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-44.08277811534257,-19.83176041393988</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
+                <kml:name>BOCAIUVA</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-43.810984</kml:longitude>
+                    <kml:latitude>-17.116635</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_sleep</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-43.810984,-17.116635</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
+                <kml:name>MONTES CLAROS</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-43.857647</kml:longitude>
+                    <kml:latitude>-16.731606</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-43.857647,-16.731606</kml:coordinates>
+                </kml:Point>
+            </kml:Placemark>
+            <kml:Placemark>
+                <kml:name>CURVELO</kml:name>
+                <kml:LookAt>
+                    <kml:longitude>-44.435624</kml:longitude>
+                    <kml:latitude>-18.762314</kml:latitude>
+                    <kml:altitude>0.0</kml:altitude>
+                    <kml:heading>0.0</kml:heading>
+                    <kml:tilt>0.0</kml:tilt>
+                    <kml:range>0.0</kml:range>
+                </kml:LookAt>
+                <kml:styleUrl>#style_icon_</kml:styleUrl>
+                <kml:Point>
+                    <kml:coordinates>-44.435624,-18.762314</kml:coordinates>
                 </kml:Point>
             </kml:Placemark>
             <kml:Placemark>
@@ -1317,7 +1386,7 @@
                         <kml:tessellate>1</kml:tessellate>
                         <kml:outerBoundaryIs>
                             <kml:LinearRing>
-<kml:coordinates>-44.08277811534257,-19.83176041393988 -44.056373,-19.928242 -43.938543,-19.752473 -44.030995,-19.603678 -44.246969,-19.446379 -44.595105,-19.868746 -44.584163,-20.082297 -44.902766,-20.139403 -44.993207,-19.875904 -45.285895,-20.090039 -45.526865,-20.020659 -45.532763,-20.28994 -45.968624,-20.470962 -45.279292,-20.890602 -45.559786,-21.094244 -45.51467,-21.37295 -45.004877,-21.23865 -44.828225,-20.704267 -44.633363,-20.53764 -44.08277811534257,-19.83176041393988</kml:coordinates>
+<kml:coordinates>-44.08277811534257,-19.83176041393988 -43.98983281730939,-19.62909581641355 -44.030995,-19.603678 -44.246969,-19.446379 -43.938543,-19.752473 -43.177918,-19.815919 -42.561654,-19.465223 -42.146049,-19.784807 -42.036065,-20.255943 -42.882204,-20.7619 -42.940615,-21.113764 -43.770892,-21.220864 -43.795272,-20.656509 -43.856644,-20.500174 -44.08277811534257,-19.83176041393988</kml:coordinates>
                             </kml:LinearRing>
                         </kml:outerBoundaryIs>
                     </kml:Polygon>
@@ -1334,7 +1403,7 @@
                         <kml:tessellate>1</kml:tessellate>
                         <kml:outerBoundaryIs>
                             <kml:LinearRing>
-<kml:coordinates>-44.08277811534257,-19.83176041393988 -43.177918,-19.815919 -42.889429,-20.414808 -42.882204,-20.7619 -42.370869,-21.143023 -42.697721,-21.380665 -42.940615,-21.113764 -43.355926,-21.757239 -43.770892,-21.220864 -43.795272,-20.656509 -44.08277811534257,-19.83176041393988</kml:coordinates>
+<kml:coordinates>-44.08277811534257,-19.83176041393988 -44.595105,-19.868746 -44.902766,-20.139403 -44.993207,-19.875904 -45.27829,-19.744152 -45.526865,-20.020659 -45.532763,-20.28994 -45.279292,-20.890602 -45.51467,-21.37295 -45.559786,-21.094244 -45.947245,-21.414451 -45.436898,-21.563785 -45.004877,-21.23865 -44.828225,-20.704267 -44.633363,-20.53764 -44.08277811534257,-19.83176041393988</kml:coordinates>
                             </kml:LinearRing>
                         </kml:outerBoundaryIs>
                     </kml:Polygon>
@@ -1351,7 +1420,7 @@
                         <kml:tessellate>1</kml:tessellate>
                         <kml:outerBoundaryIs>
                             <kml:LinearRing>
-<kml:coordinates>-44.08277811534257,-19.83176041393988 -45.27829,-19.744152 -45.947245,-21.414451 -45.921966,-21.678517 -45.935178,-22.226254 -45.253325,-21.685322 -45.436898,-21.563785 -44.08277811534257,-19.83176041393988</kml:coordinates>
+<kml:coordinates>-44.08277811534257,-19.83176041393988 -45.285895,-20.090039 -45.95858929418302,-20.470692269595915 -45.921966,-21.678517 -45.935178,-22.226254 -45.253325,-21.685322 -44.584163,-20.082297 -44.08277811534257,-19.83176041393988</kml:coordinates>
                             </kml:LinearRing>
                         </kml:outerBoundaryIs>
                     </kml:Polygon>
@@ -1368,7 +1437,7 @@
                         <kml:tessellate>1</kml:tessellate>
                         <kml:outerBoundaryIs>
                             <kml:LinearRing>
-<kml:coordinates>-44.08277811534257,-19.83176041393988 -44.435624,-18.762314 -43.810984,-17.116635 -43.857647,-16.731606 -44.08277811534257,-19.83176041393988</kml:coordinates>
+<kml:coordinates>-44.08277811534257,-19.83176041393988 -41.505929,-17.857623 -41.956363,-18.864137 -42.640778184641924,-19.54509047412781 -44.08277811534257,-19.83176041393988</kml:coordinates>
                             </kml:LinearRing>
                         </kml:outerBoundaryIs>
                     </kml:Polygon>
@@ -1385,7 +1454,7 @@
                         <kml:tessellate>1</kml:tessellate>
                         <kml:outerBoundaryIs>
                             <kml:LinearRing>
-<kml:coordinates>-44.08277811534257,-19.83176041393988 -42.561654,-19.465223 -41.505929,-17.857623 -41.956363,-18.864137 -44.08277811534257,-19.83176041393988</kml:coordinates>
+<kml:coordinates>-44.08277811534257,-19.83176041393988 -42.889429,-20.414808 -42.370869,-21.143023 -42.697721,-21.380665 -43.355926,-21.757239 -44.08277811534257,-19.83176041393988</kml:coordinates>
                             </kml:LinearRing>
                         </kml:outerBoundaryIs>
                     </kml:Polygon>
@@ -1402,7 +1471,7 @@
                         <kml:tessellate>1</kml:tessellate>
                         <kml:outerBoundaryIs>
                             <kml:LinearRing>
-<kml:coordinates>-44.08277811534257,-19.83176041393988 -42.036065,-20.255943 -44.08277811534257,-19.83176041393988</kml:coordinates>
+<kml:coordinates>-44.08277811534257,-19.83176041393988 -43.810984,-17.116635 -43.857647,-16.731606 -44.435624,-18.762314 -44.08277811534257,-19.83176041393988</kml:coordinates>
                             </kml:LinearRing>
                         </kml:outerBoundaryIs>
                     </kml:Polygon>

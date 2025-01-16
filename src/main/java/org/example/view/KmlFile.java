@@ -1,7 +1,7 @@
 package org.example.view;
 
 import de.micromata.opengis.kml.v_2_2_0.*;
-import org.example.modelos.Caminhao;
+import org.example.modelos.Formiga;
 import org.example.modelos.Localidade;
 
 import java.io.File;
@@ -27,7 +27,7 @@ public class KmlFile {
     };
 
 
-    public void criarArquivo(List<Caminhao> melhorCaminho) throws IOException {
+    public void criarArquivo(List<Formiga> melhorCaminho) throws IOException {
         final Kml kml = new Kml();
         Document doc = kml.createAndSetDocument().withName("TCC").withOpen(true);
 
@@ -38,7 +38,7 @@ public class KmlFile {
 
 
         for (int i = 0; i < melhorCaminho.size(); i ++) {
-            Caminhao caminhao = melhorCaminho.get(i);
+            Formiga formiga = melhorCaminho.get(i);
 
             Style style = doc.createAndAddStyle();
             style.withId("style_" + i) // set the stylename to use this style from the placemark
@@ -49,8 +49,8 @@ public class KmlFile {
 
             LinearRing linearRing = new LinearRing();
 
-            for (int j = 0; j < caminhao.cidadesVisitadas.size(); j++) {
-                Localidade localidade = caminhao.cidadesVisitadas.get(j);
+            for (int j = 0; j < formiga.cidadesVisitadas.size(); j++) {
+                Localidade localidade = formiga.cidadesVisitadas.get(j);
                 linearRing.addToCoordinates(localidade.getY(), localidade.getX());
                 createPlacemarkWithChart(doc, folder, localidade.getY(), localidade.getX(), localidade.getNome(), localidade.dormiu ? "sleep" : "");
             }

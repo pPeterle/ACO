@@ -25,14 +25,6 @@ public class Rotas {
                     .map(item -> new Localidade(item[0], Double.parseDouble(item[1]), Double.parseDouble(item[2]), Integer.parseInt(item[3]), false))
                     .toList();
 
-            CSVReader hoteisCsv = new CSVReaderBuilder(new FileReader("src/main/files/Hoteis.csv")).build();
-            List<String[]> hoteisString = hoteisCsv.readAll();
-
-            List<Localidade> hoteisArrayList = hoteisString.stream()
-                    .skip(1)
-                    .map(item -> new Localidade(item[1], Double.parseDouble(item[3]), Double.parseDouble(item[4]), 0, true))
-                    .toList();
-            
             CSVReader rotasFile = new CSVReaderBuilder(new FileReader("src/main/files/Rotas.csv")).build();
             List<String[]> rotasString = rotasFile.readAll();
 
