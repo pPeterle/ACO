@@ -1,5 +1,7 @@
 package org.example.modelos;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -13,7 +15,7 @@ public class Solucao {
     
     public Set<String> localidadesVisitadas;
     
-    public Solucao(List<Localidade> localidades, List<Localidade> hoteis) {
+    public Solucao(@NotNull List<Localidade> localidades, List<Localidade> hoteis) {
         this.localidades = new ArrayList<>();
         this.formigas = new ArrayList<>();
         this.localidadesVisitadas = new HashSet<>();
@@ -85,7 +87,7 @@ public class Solucao {
         return possiveisViagens.get(random.nextInt(possiveisViagens.size()));
     }
     
-    public void visitarLocalidade(Viagem viagem) {
+    public void visitarLocalidade(@NotNull Viagem viagem) {
         Formiga ultimaFormiga = getUltimoCaminhao();
         localidadesVisitadas.add(viagem.localidade.getNome());
         for (Localidade l : localidades) {
@@ -94,7 +96,7 @@ public class Solucao {
         ultimaFormiga.visitarLocalidade(viagem);
     }
     
-    public boolean visitouLocalidade(Localidade localidade) {
+    public boolean visitouLocalidade(@NotNull Localidade localidade) {
         return localidadesVisitadas.contains(localidade.getNome());
     }
     
