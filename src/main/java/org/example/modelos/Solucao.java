@@ -51,7 +51,7 @@ public class Solucao {
         return finalizou;
     }
     
-    public boolean utilizarNovoCaminhao() {
+    public boolean utilizarNovaFormiga() {
         if (this.formigas.isEmpty()) {
             this.formigas.add(new Formiga(localidades, hoteis));
             

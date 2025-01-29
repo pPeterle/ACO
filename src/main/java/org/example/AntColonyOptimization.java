@@ -98,7 +98,7 @@ public class AntColonyOptimization {
     private void moverFormigas() {
         for (Solucao solucao : solucoes) {
             while (!solucao.finalizouPercurso()) {
-                solucao.utilizarNovoCaminhao();
+                solucao.utilizarNovaFormiga();
                 Viagem viagem = selecionarProximaViagem(solucao);
                 solucao.visitarLocalidade(viagem);
             }
