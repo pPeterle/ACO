@@ -158,7 +158,7 @@ public class AntColonyOptimization {
         }
         for (Solucao solucao : solucoes) {
             double contribuicao = Q / solucao.distanciaPercorrida();
-            for (Formiga formiga : solucao.caminhoes) {
+            for (Formiga formiga : solucao.formigas) {
                 for (int i = 0; i < formiga.cidadesVisitadas.size() - 1; i++) {
                     Localidade localidadeA = formiga.cidadesVisitadas.get(i);
                     Localidade localidadeB = formiga.cidadesVisitadas.get(i + 1);
@@ -172,7 +172,7 @@ public class AntColonyOptimization {
     
     private void autalizarMelhorSolucao() {
         if (melhorCaminho == null || melhorCaminho.isEmpty()) {
-            melhorCaminho = solucoes.get(0).caminhoes;
+            melhorCaminho = solucoes.get(0).formigas;
             custoMelhorCaminho = calcularCusto(solucoes.get(0));
         }
         
@@ -180,13 +180,13 @@ public class AntColonyOptimization {
             double custo = calcularCusto(solucao);
             if (custo < custoMelhorCaminho) {
                 custoMelhorCaminho = custo;
-                melhorCaminho = new ArrayList<>(solucao.caminhoes);
+                melhorCaminho = new ArrayList<>(solucao.formigas);
             }
         }
     }
 
     public static double calcularCusto(Solucao solucao) {
-        return (solucao.distanciaPercorrida() * custoPoKm) + (solucao.caminhoes.size() * custoCaminhao) ;
+        return (solucao.distanciaPercorrida() * custoPoKm) + (solucao.formigas.size() * custoCaminhao) ;
     }
     
     private void limparFeromonioRotas() {

@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class Solucao {
     
-    public ArrayList<Formiga> caminhoes;
+    public ArrayList<Formiga> formigas;
     
     public List<Localidade> localidades;
 
@@ -15,7 +15,7 @@ public class Solucao {
     
     public Solucao(List<Localidade> localidades, List<Localidade> hoteis) {
         this.localidades = new ArrayList<>();
-        this.caminhoes = new ArrayList<>();
+        this.formigas = new ArrayList<>();
         this.localidadesVisitadas = new HashSet<>();
         this.hoteis = hoteis;
         
@@ -37,7 +37,7 @@ public class Solucao {
         
         boolean todosCaminhoesVoltaramAoDeposito = true;
         
-        for (Formiga formiga : caminhoes) {
+        for (Formiga formiga : formigas) {
             Localidade deposito = formiga.cidadesVisitadas.get(0);
             Localidade ultimaLocalidade = formiga.cidadesVisitadas.get(formiga.cidadesVisitadas.size() - 1);
             
@@ -50,8 +50,8 @@ public class Solucao {
     }
     
     public boolean utilizarNovoCaminhao() {
-        if (this.caminhoes.isEmpty()) {
-            this.caminhoes.add(new Formiga(localidades, hoteis));
+        if (this.formigas.isEmpty()) {
+            this.formigas.add(new Formiga(localidades, hoteis));
             
             return true;
         }
@@ -66,12 +66,12 @@ public class Solucao {
             throw new RuntimeException("Gerando caminhão infinitos");
         }
         
-        this.caminhoes.add(new Formiga(localidades, hoteis));
+        this.formigas.add(new Formiga(localidades, hoteis));
         return true;
     }
     
     public Viagem escolherProxCidadeAleatoria() {
-        Formiga formiga = caminhoes.get(caminhoes.size() - 1);
+        Formiga formiga = formigas.get(formigas.size() - 1);
         
         ArrayList<Viagem> possiveisViagens = new ArrayList<>();
         for (Localidade localidade : localidades) {
@@ -99,7 +99,7 @@ public class Solucao {
     }
     
     public List<Viagem> getPossiveisLocalidadesParaVisitar() {
-        Formiga formiga = caminhoes.get(caminhoes.size() - 1);
+        Formiga formiga = formigas.get(formigas.size() - 1);
         return localidades.stream()
                 .filter(localidade -> !localidade.recebeuEntrega())
                 .map(formiga::podeVisitarCidade)
@@ -110,7 +110,7 @@ public class Solucao {
     }
     
     public Formiga getUltimoCaminhao() {
-        return this.caminhoes.get(this.caminhoes.size() - 1);
+        return this.formigas.get(this.formigas.size() - 1);
     }
     
     public void limpar() {
@@ -118,7 +118,7 @@ public class Solucao {
         for (Localidade l : localidades) {
             novasLocalidades.add(l.copiar());
         }
-        this.caminhoes = new ArrayList<>();
+        this.formigas = new ArrayList<>();
         this.localidadesVisitadas = new HashSet<>();
         
         //inicia no deposito
@@ -128,7 +128,7 @@ public class Solucao {
     
     public double distanciaPercorrida() {
         double distanciaTotal = 0;
-        for (Formiga formiga : caminhoes) {
+        for (Formiga formiga : formigas) {
             for (int i = 0; i < formiga.cidadesVisitadas.size() - 1; i++) {
                 Localidade localidade = formiga.cidadesVisitadas.get(i);
                 Localidade localidade2 = formiga.cidadesVisitadas.get(i + 1);
