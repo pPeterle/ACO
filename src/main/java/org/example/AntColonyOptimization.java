@@ -121,8 +121,6 @@ public class AntColonyOptimization {
     }
     
     private Viagem selecionarProximaViagem(Solucao solucao) {
-        if (solucao.getUltimoCaminhao().podeVoltarDeposito()) return new Viagem(localidades.get(0), TipoViagem.VIAGEM_ENTRE_CIDADES);
-        
         if (random.nextDouble() < fatorAleatoriedade) {
             return solucao.escolherProxCidadeAleatoria();
         }
@@ -152,16 +150,12 @@ public class AntColonyOptimization {
 
         for (Viagem viagem : possiveisViagens) {
             Localidade localidade = viagem.localidade;
-            if (!solucao.visitouLocalidade(localidade)) {
                 Double feromonio = localidadeAtual.getFeromonio(localidade.getNome());
                 double distancia = localidadeAtual.calcularDistancia(localidade);
                 totalFeromonio += Math.pow(feromonio, alpha) * Math.pow(1.0 / distancia, beta);
-            }
         }
         for (Viagem viagem : possiveisViagens) {
             Localidade localidade = viagem.localidade;
-            if (solucao.visitouLocalidade(localidade)) viagem.setProbabilidade(0d);
-            else {
                 double feromonio = localidadeAtual.getFeromonio(localidade.getNome());
                 double distancia = localidadeAtual.calcularDistancia(localidade);
                 double heuristica = Math.pow(1.0 /distancia , beta);
@@ -174,7 +168,6 @@ public class AntColonyOptimization {
                     viagem.setProbabilidade(probabilidade);
                 }
 
-            }
         }
     }
     

@@ -2,8 +2,10 @@ package org.example.modelos;
 
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.text.View;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Solucao {
     
@@ -15,8 +17,6 @@ public class Solucao {
     
     public Set<String> localidadesVisitadas;
 
-    private Random random = new Random();
-    
     public Solucao(@NotNull List<Localidade> localidades, List<Localidade> hoteis) {
         this.localidades = new ArrayList<>();
         this.formigas = new ArrayList<>();
@@ -77,14 +77,7 @@ public class Solucao {
     public Viagem escolherProxCidadeAleatoria() {
         Formiga formiga = formigas.get(formigas.size() - 1);
         
-        ArrayList<Viagem> possiveisViagens = new ArrayList<>();
-        for (Localidade localidade : localidades) {
-            boolean recebeuEntrega = localidade.recebeuEntrega();
-            Viagem viagem = formiga.podeVisitarCidade(localidade);
-            boolean podeVisitarCidade = viagem.tipoViagem != TipoViagem.IMPOSSIVEL;
-            if (!recebeuEntrega && podeVisitarCidade) possiveisViagens.add(viagem);
-        }
-        
+        List<Viagem> possiveisViagens = getPossiveisLocalidadesParaVisitar();
         Random random = new Random();
         return possiveisViagens.get(random.nextInt(possiveisViagens.size()));
     }
@@ -104,13 +97,16 @@ public class Solucao {
     
     public List<Viagem> getPossiveisLocalidadesParaVisitar() {
         Formiga formiga = formigas.get(formigas.size() - 1);
-        return localidades.stream()
-                .filter(localidade -> !localidade.recebeuEntrega())
+        Localidade ultimaLocalidade = formiga.getUltimaLocalidade();
+        List<Viagem> possiveisLocalidades =  localidades.stream()
+                .filter(localidade -> !localidade.recebeuEntrega() || localidade.hotel || localidade.getNome().equals("DEPÓSITO"))
                 .map(formiga::podeVisitarCidade)
                 .filter(viagem ->
                     viagem.tipoViagem != TipoViagem.IMPOSSIVEL
                 )
-                .collect(Collectors.toList());
+                .toList();
+
+        return possiveisLocalidades;
     }
     
     public Formiga getUltimoCaminhao() {
