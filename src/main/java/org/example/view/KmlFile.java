@@ -27,7 +27,7 @@ public class KmlFile {
     };
 
 
-    public void criarArquivo(List<Formiga> melhorCaminho) throws IOException {
+    public void criarArquivo(List<Formiga> melhorCaminho, String arquivo) throws IOException {
         final Kml kml = new Kml();
         Document doc = kml.createAndSetDocument().withName("TCC").withOpen(true);
 
@@ -52,7 +52,7 @@ public class KmlFile {
             for (int j = 0; j < formiga.cidadesVisitadas.size(); j++) {
                 Localidade localidade = formiga.cidadesVisitadas.get(j);
                 linearRing.addToCoordinates(localidade.getY(), localidade.getX());
-                createPlacemarkWithChart(doc, folder, localidade.getY(), localidade.getX(), localidade.getNome(), localidade.dormiu ? "sleep" : "");
+                createPlacemarkWithChart(doc, folder, localidade.getY(), localidade.getX(), localidade.getNome(), localidade.hotel ? "sleep" : "");
             }
 
             placemark.createAndSetMultiGeometry().createAndAddPolygon().withTessellate(true).createAndSetOuterBoundaryIs().setLinearRing(linearRing);
@@ -60,7 +60,7 @@ public class KmlFile {
         }
 
         // print and save
-        kml.marshal(new File("mapa.kml"));
+        kml.marshal(new File(arquivo + ".kml"));
     }
 
     private void createPlacemarkWithChart(Document document, Folder folder, double longitude, double latitude,

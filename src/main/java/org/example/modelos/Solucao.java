@@ -14,6 +14,8 @@ public class Solucao {
     public  List<Localidade> hoteis;
     
     public Set<String> localidadesVisitadas;
+
+    private Random random = new Random();
     
     public Solucao(@NotNull List<Localidade> localidades, List<Localidade> hoteis) {
         this.localidades = new ArrayList<>();
@@ -61,13 +63,13 @@ public class Solucao {
         Formiga ultimaFormiga = getUltimoCaminhao();
         Localidade deposito = ultimaFormiga.cidadesVisitadas.get(0);
         Localidade ultimaLocalidade = ultimaFormiga.cidadesVisitadas.get(ultimaFormiga.cidadesVisitadas.size() - 1);
-        
+
         if (!deposito.getNome().equals(ultimaLocalidade.getNome())) return false;
         
         if(ultimaFormiga.getQtdCarga() == 0) {
             throw new RuntimeException("Gerando caminhão infinitos");
         }
-        
+
         this.formigas.add(new Formiga(localidades, hoteis));
         return true;
     }
@@ -131,11 +133,7 @@ public class Solucao {
     public double distanciaPercorrida() {
         double distanciaTotal = 0;
         for (Formiga formiga : formigas) {
-            for (int i = 0; i < formiga.cidadesVisitadas.size() - 1; i++) {
-                Localidade localidade = formiga.cidadesVisitadas.get(i);
-                Localidade localidade2 = formiga.cidadesVisitadas.get(i + 1);
-                distanciaTotal += localidade.calcularDistancia(localidade2);
-            }
+            distanciaTotal += formiga.distanciaPercorrida;
         }
         
         return distanciaTotal;

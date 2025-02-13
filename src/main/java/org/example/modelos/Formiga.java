@@ -2,6 +2,7 @@ package org.example.modelos;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Formiga {
 
@@ -9,7 +10,6 @@ public class Formiga {
 
     private final int maxCarga = 120;
 
-    private final int tempoDescarga = 15;
     final private StringBuilder historico;
     final private List<Localidade> localidades;
     final private List<Localidade> hoteis;
@@ -20,8 +20,8 @@ public class Formiga {
     private boolean primeiroDia = true;
     private int qtdCarga = 0;
 
+    public double distanciaPercorrida = 0d;
 
-    
     Formiga(List<Localidade> localidades, List<Localidade> hoteis) {
         this.localidades = localidades;
         this.cidadesVisitadas = new ArrayList<>();
@@ -37,7 +37,9 @@ public class Formiga {
         if (!cidadesVisitadas.isEmpty()) {
             Localidade ultimaLocalidade = cidadesVisitadas.get(cidadesVisitadas.size() - 1);
 
-            if (viagem.localidade.getNome().equals(ultimaLocalidade.getNome())) throw new RuntimeException("Visitando a mesma cidade");
+            if (viagem.localidade.getNome().equals(ultimaLocalidade.getNome())) {
+                throw new RuntimeException("Visitando a mesma cidade");
+            }
         }
 
         int novaCarga = viagem.localidade.getQtdItensReceber();
@@ -55,18 +57,17 @@ public class Formiga {
             case VIAGEM_ENTRE_CIDADES -> {
                 double distanciaProxCidade = localidadeAtual.calcularDistancia(proxLocalidade);
 
-                historico.append(" -> ").append(proxLocalidade.getNome()).append(" (").append(qtdCarga).append(") ");
+                historico.append(" -> ").append(proxLocalidade.getNome()).append(" (").append(distanciaProxCidade).append(") ");
                 // minutos do descolamento
                 reduzirJornadaTrabalho(distanciaProxCidade * velocidadeMediaKmPorMinuto);
                 // minutos para descarga
-                if(jornadaDeTrabalhoDia2 < 15) {
-                    System.out.println("deu ruim");
-                }
+
                 if(proxLocalidade == this.cidadesVisitadas.get(0))
-                reduzirJornadaTrabalho(tempoDescarga);
+                    reduzirJornadaTrabalho(proxLocalidade.getTempoDescarga());
 
-                historico.append(String.format("C-C: %.2f | %.2f | %.2f ", distanciaProxCidade * velocidadeMediaKmPorMinuto, jornadaDeTrabalhoDia1, jornadaDeTrabalhoDia2));
+                //historico.append(String.format("C-C: %.2f | %.2f | %.2f ", distanciaProxCidade * velocidadeMediaKmPorMinuto, jornadaDeTrabalhoDia1, jornadaDeTrabalhoDia2));
 
+                distanciaPercorrida += distanciaProxCidade;
                 cidadesVisitadas.add(proxLocalidade);
             }
             case ENTREGA_DORME -> {
@@ -76,21 +77,25 @@ public class Formiga {
                 double distanciaIrDormirAPartirDaProxLocalidade = proxLocalidade.calcularDistancia(hotel);
 
 
-                historico.append(" -> ").append(proxLocalidade.getNome()).append(" (").append(qtdCarga).append(") ");
+                historico.append(" -> ").append(proxLocalidade.getNome()).append(" (").append(distanciaProxCidade).append(") ");
                 reduzirJornadaTrabalho(distanciaProxCidade * velocidadeMediaKmPorMinuto);
-                reduzirJornadaTrabalho(tempoDescarga);
+                reduzirJornadaTrabalho(proxLocalidade.getTempoDescarga());
 
-                historico.append(String.format("C-C: %.2f ", distanciaProxCidade * velocidadeMediaKmPorMinuto));
+                //historico.append(String.format("C-C: %.2f ", distanciaProxCidade * velocidadeMediaKmPorMinuto));
+
                 cidadesVisitadas.add(proxLocalidade);
 
                 //System.out.println("Indo ao hotel");
                 reduzirJornadaTrabalho(distanciaIrDormirAPartirDaProxLocalidade * velocidadeMediaKmPorMinuto);
-                historico.append("Fez a enterga e Dormiu em  ").append(hotel.getNome()).append(" ) ");
-                historico.append(String.format("C-H: %.2f | %.2f | %.2f ", distanciaIrDormirAPartirDaProxLocalidade * velocidadeMediaKmPorMinuto, jornadaDeTrabalhoDia1, jornadaDeTrabalhoDia2));
+                historico.append("Fez a enterga e Dormiu em  ").append(hotel.getNome()).append("(  ").append(distanciaIrDormirAPartirDaProxLocalidade).append(" )");
+                //historico.append(String.format("C-H: %.2f | %.2f | %.2f ", distanciaIrDormirAPartirDaProxLocalidade * velocidadeMediaKmPorMinuto, jornadaDeTrabalhoDia1, jornadaDeTrabalhoDia2));
                 //System.out.println("Dormiu");
+
+                //cidadesVisitadas.add(hotel);
 
                 primeiroDia = false;
                 proxLocalidade.dormiu = true;
+                distanciaPercorrida += distanciaProxCidade + distanciaIrDormirAPartirDaProxLocalidade;
             }
             case DORME_ENTREGA -> {
                 Localidade hotel = this.buscarHotelMaisProximo(proxLocalidade);
@@ -98,8 +103,10 @@ public class Formiga {
                 double distanciaHotelParaProxCidade = hotel.calcularDistancia(proxLocalidade);
 
                 reduzirJornadaTrabalho(distanciaIrDormirAPartirDaLocalidadeAtual * velocidadeMediaKmPorMinuto);
-                historico.append("Dormiu em  ").append(hotel.getNome()).append(") ").append(" realizou a entrega no outro dia");
-                historico.append(String.format("C-H: %.2f ", distanciaIrDormirAPartirDaLocalidadeAtual * velocidadeMediaKmPorMinuto));
+                historico.append("Dormiu em  ").append(hotel.getNome()).append("( ").append(distanciaIrDormirAPartirDaLocalidadeAtual).append(" ) ").append(" realizou a entrega no outro dia");
+                //historico.append(String.format("C-H: %.2f ", distanciaIrDormirAPartirDaLocalidadeAtual * velocidadeMediaKmPorMinuto));
+
+                //cidadesVisitadas.add(hotel);
 
                 //System.out.println("Dormiu");
                 localidadeAtual.dormiu = true;
@@ -107,10 +114,11 @@ public class Formiga {
 
                 //System.out.println(" entregando");
                 reduzirJornadaTrabalho(distanciaHotelParaProxCidade * velocidadeMediaKmPorMinuto);
-                reduzirJornadaTrabalho(tempoDescarga);
-                historico.append(" -> ").append(proxLocalidade.getNome()).append(" (").append(qtdCarga).append(") ");
-                historico.append(String.format("H-C:  %.2f | %.2f | %.2f ", distanciaHotelParaProxCidade * velocidadeMediaKmPorMinuto, jornadaDeTrabalhoDia1, jornadaDeTrabalhoDia2));
+                reduzirJornadaTrabalho(proxLocalidade.getTempoDescarga());
+                historico.append(" -> ").append(proxLocalidade.getNome()).append(" (").append(distanciaHotelParaProxCidade).append(") ");
+                //historico.append(String.format("H-C:  %.2f | %.2f | %.2f ", distanciaHotelParaProxCidade * velocidadeMediaKmPorMinuto, jornadaDeTrabalhoDia1, jornadaDeTrabalhoDia2));
                 cidadesVisitadas.add(proxLocalidade);
+                distanciaPercorrida += distanciaIrDormirAPartirDaLocalidadeAtual + distanciaHotelParaProxCidade;
             }
             case IMPOSSIVEL -> throw new RuntimeException("Nenhuma categoria de entrega encontrada");
 
@@ -120,7 +128,7 @@ public class Formiga {
     
     public boolean podeVoltarDeposito() {
         if (qtdCarga == maxCarga) return true;
-        
+
         boolean podeRealizarMaisAlgumaEntrega = false;
         for (Localidade localidade : localidades) {
             if (!localidade.recebeuEntrega()) {
@@ -128,6 +136,10 @@ public class Formiga {
                 if (podeRealizarMaisAlgumaEntrega) break;
             }
             
+        }
+
+        if (!podeRealizarMaisAlgumaEntrega && cidadesVisitadas.size() == 1) {
+            throw new RuntimeException("Nenhuma rota satisfaz as condições");
         }
         
         return !podeRealizarMaisAlgumaEntrega;
@@ -154,15 +166,15 @@ public class Formiga {
         boolean restricaoDeCarga = (qtdCarga + proxLocalidade.getQtdItensReceber()) <= maxCarga;
 
 
-        double tempoDistanciaProxCidadeEVoltarComTempoDescarga = (((distanciaProxCidade + distanciaVoltar) * velocidadeMediaKmPorMinuto) + tempoDescarga);
+        double tempoDistanciaProxCidadeEVoltarComTempoDescarga = (((distanciaProxCidade + distanciaVoltar) * velocidadeMediaKmPorMinuto) + proxLocalidade.getTempoDescarga());
 
         boolean consegueRealizarEntregaNoMesmoDia = primeiroDia && jornadaDeTrabalhoDia1 > tempoDistanciaProxCidadeEVoltarComTempoDescarga && restricaoDeCarga;
 
         boolean consegueRealizarEntregaNoProxDia = !primeiroDia && jornadaDeTrabalhoDia2 > tempoDistanciaProxCidadeEVoltarComTempoDescarga && restricaoDeCarga;
 
-        boolean consegueEntregarEIrAoHotelNoMesmoDiaEVoltarNoProximo = primeiroDia && jornadaDeTrabalhoDia1 > ((distanciaProxCidade + distanciaIrDormirAPartirDaProxLocalidade) * velocidadeMediaKmPorMinuto) + tempoDescarga && jornadaDeTrabalhoDia2 > (distanciaVoltarHotel * velocidadeMediaKmPorMinuto)  && restricaoDeCarga;
+        boolean consegueEntregarEIrAoHotelNoMesmoDiaEVoltarNoProximo = primeiroDia && jornadaDeTrabalhoDia1 > ((distanciaProxCidade + distanciaIrDormirAPartirDaProxLocalidade) * velocidadeMediaKmPorMinuto) + proxLocalidade.getTempoDescarga() && jornadaDeTrabalhoDia2 > (distanciaVoltarHotel * velocidadeMediaKmPorMinuto) && restricaoDeCarga;
 
-        boolean consegueIrParaHotelERealizarEntregaNoOutroDia = primeiroDia && jornadaDeTrabalhoDia1 > (distanciaIrDormirAPartirDaLocalidadeAtual * velocidadeMediaKmPorMinuto) && jornadaDeTrabalhoDia2 > ((distanciaHotelParaProxCidade + distanciaVoltar) * velocidadeMediaKmPorMinuto) + tempoDescarga  && restricaoDeCarga;
+        boolean consegueIrParaHotelERealizarEntregaNoOutroDia = primeiroDia && jornadaDeTrabalhoDia1 > (distanciaIrDormirAPartirDaLocalidadeAtual * velocidadeMediaKmPorMinuto) && jornadaDeTrabalhoDia2 > ((distanciaHotelParaProxCidade + distanciaVoltar) * velocidadeMediaKmPorMinuto) + proxLocalidade.getTempoDescarga() && restricaoDeCarga;
 
         if (consegueRealizarEntregaNoMesmoDia || consegueRealizarEntregaNoProxDia)
             return new Viagem(proxLocalidade, TipoViagem.VIAGEM_ENTRE_CIDADES);

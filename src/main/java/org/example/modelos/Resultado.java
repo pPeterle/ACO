@@ -3,7 +3,15 @@ package org.example.modelos;
 public class Resultado {
     private final double custoTotal;
     private final long tempo;
-    private final double index;
+    private final double a;
+    private final double b;
+
+    public Resultado(double custoTotal, long tempo, double a, double b) {
+        this.custoTotal = custoTotal;
+        this.tempo = tempo;
+        this.a = a;
+        this.b = b;
+    }
 
     public double getCustoTotal() {
         return custoTotal;
@@ -13,13 +21,11 @@ public class Resultado {
         return tempo;
     }
 
-    public double getIndex() {
-        return index;
+    public double getA() {
+        return a;
     }
 
-    public Resultado(double custoTotal, long tempo, double index) {
-        this.custoTotal = custoTotal;
-        this.tempo = tempo;
-        this.index = index;
+    public double getB() {
+        return b;
     }
 }

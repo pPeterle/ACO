@@ -2,13 +2,20 @@ package org.example;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
+import org.example.modelos.Execucao;
 import org.example.modelos.Formiga;
 import org.example.modelos.Localidade;
+import org.example.modelos.Resultado;
 import org.example.view.KmlFile;
 import org.example.view.PanAndZoom;
 
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * Hello world!
@@ -17,45 +24,59 @@ public class App {
 
     public static void main(String[] args) {
         try {
-            
-            CSVReader localidadesFile = new CSVReaderBuilder(new FileReader("src/main/files/Demanda.csv")).build();
-            List<String[]> localidadesString = localidadesFile.readAll();
-            
-            List<Localidade> localidadeArrayList = localidadesString.stream()
-                    .skip(1)
-                    .map(item -> new Localidade(item[0], Double.parseDouble(item[1]), Double.parseDouble(item[2]), Integer.parseInt(item[3]), false))
-                    .toList();
 
-            CSVReader hoteisCsv = new CSVReaderBuilder(new FileReader("src/main/files/Hoteis.csv")).build();
-            List<String[]> hoteisString = hoteisCsv.readAll();
+            ThreadPoolExecutor executor =
+                    (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
 
-            List<Localidade> hoteisArrayList = hoteisString.stream()
-                    .skip(1)
-                    .map(item -> new Localidade(item[1], Double.parseDouble(item[3]), Double.parseDouble(item[4]), 0, true))
-                    .toList();
+            List<Callable<Void>> tasks = new ArrayList<>();
+            List<Execucao> execucoes = new ArrayList();
+            execucoes.add(new Execucao(2, 10));
+            execucoes.add(new Execucao(2, 10));
+            execucoes.add(new Execucao(2, 10));
+            execucoes.add(new Execucao(2, 10));
+            execucoes.add(new Execucao(2, 10));
 
-//            ThreadPoolExecutor executor =
-//                    (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
+//            for (int i = 0; i < execucoes.size(); i++) {
+//                Execucao execucao = execucoes.get(i);
+//                int finalI = i;
 //
-//            List<Callable<Resultado>> tasks = new ArrayList<>();
-//            for (double i = 0; i < 10; i += 0.1) {
+//                CSVReader localidadesFile = new CSVReaderBuilder(new FileReader("src/main/files/Demanda 3.csv")).build();
+//                List<String[]> localidadesString = localidadesFile.readAll();
 //
-//                AntColonyOptimization aco = new AntColonyOptimization(1.0 + i, 1.0 + (i * 1.5), 0.85, 1000, 0.05, 10000, 200, localidadeArrayList, hoteisArrayList);
-//                double finalI = i;
-//                tasks.add(new Callable<Resultado>() {
+//                List<Localidade> localidadeArrayList = localidadesString.stream()
+//                        .skip(2)
+//                        .map(item -> new Localidade(item[0], Double.parseDouble(item[1]), Double.parseDouble(item[2]), Integer.parseInt(item[4 + finalI]), Integer.parseInt(item[3]),false))
+//                        .toList();
+//
+//                CSVReader hoteisCsv = new CSVReaderBuilder(new FileReader("src/main/files/Hoteis 2.csv")).build();
+//                List<String[]> hoteisString = hoteisCsv.readAll();
+//
+//                List<Localidade> hoteisArrayList = hoteisString.stream()
+//                        .skip(1)
+//                        .map(item -> new Localidade(item[1], Double.parseDouble(item[4]), Double.parseDouble(item[5]), 0, 0, true))
+//                        .toList();
+//
+//
+//                AntColonyOptimization aco = new AntColonyOptimization(execucao.getA(), execucao.getB(), 0.85, 10000, 0.1, 1000, 1000, localidadeArrayList, hoteisArrayList, Integer.toString(i + 1));
+//
+//                tasks.add(new Callable<Void>() {
 //                    @Override
-//                    public Resultado call() throws Exception {
-//                        long tempoInicial = System.currentTimeMillis();
-//                        double custo =  aco.comecarOtimizacao();
-//                        long tempoTotal = System.currentTimeMillis() - tempoInicial;
+//                    public Void call() throws Exception {
+//                        List<Formiga> melhorCaminho =  aco.comecarOtimizacao();
 //
-//                        return new Resultado(custo, tempoTotal, finalI);
+//                        KmlFile kmlFile = new KmlFile();
+//                        kmlFile.criarArquivo(melhorCaminho, "Mapa " + (finalI + 1));
+//
+//                        return null;
 //                    }
 //                });
+//
 //            }
 //
+//            executor.invokeAll(tasks);
+
 //            List<Future<Resultado>> resultados =  executor.invokeAll(tasks);
-//            Resultado melhorResultado = new Resultado(0, 0, 0);
+//            Resultado melhorResultado = new Resultado(0, 0, 0, 0);
 //
 //            for (Future<Resultado> tarefaResultado: resultados) {
 //                Resultado resultado = tarefaResultado.get();
@@ -64,23 +85,44 @@ public class App {
 //                    melhorResultado = resultado;
 //                }
 //
+//                System.out.printf("O valor de alpha %f e o valor de beta %f teve o  menor custo %.2f com o tempo de %d \n", resultado.getA(), resultado.getB(),resultado.getCustoTotal(), resultado.getTempo() / 1000);
+//
 //            }
-//
-//            System.out.printf("O índice %f teve o  menor custo %.2f com o tempo de %d \n", melhorResultado.getIndex(),melhorResultado.getCustoTotal(), melhorResultado.getTempo() / 1000);
-//
-            AntColonyOptimization aco = new AntColonyOptimization(1.6, 3, 0.85, 1000, 0.05, 1000, 20, localidadeArrayList, hoteisArrayList);
+//            System.out.println("Melhor resultado: \n\n\n\n");
+//            System.out.printf("O valor de alpha %f e o valor de beta %f teve o  menor custo %.2f com o tempo de %d \n", melhorResultado.getA(), melhorResultado.getB(),melhorResultado.getCustoTotal(), melhorResultado.getTempo() / 1000);
+
+
+                            CSVReader localidadesFile = new CSVReaderBuilder(new FileReader("src/main/files/Demanda 2.csv")).build();
+                List<String[]> localidadesString = localidadesFile.readAll();
+
+                List<Localidade> localidadeArrayList = localidadesString.stream()
+                        .skip(2)
+                        .map(item -> new Localidade(item[0], Double.parseDouble(item[1]), Double.parseDouble(item[2]), Integer.parseInt(item[4]), Integer.parseInt(item[3]),false))
+                        .toList();
+
+                CSVReader hoteisCsv = new CSVReaderBuilder(new FileReader("src/main/files/Hoteis 2.csv")).build();
+                List<String[]> hoteisString = hoteisCsv.readAll();
+
+                List<Localidade> hoteisArrayList = hoteisString.stream()
+                        .skip(1)
+                        .map(item -> new Localidade(item[1], Double.parseDouble(item[4]), Double.parseDouble(item[5]), 0, 0, true))
+                        .toList();
+
+            AntColonyOptimization aco = new AntColonyOptimization(2, 3, 0.1, 10000, 0.05, 1000, 20, localidadeArrayList, hoteisArrayList, "label");
 
 
             List<Formiga> melhorCaminho = aco.comecarOtimizacao();
 
-            javax.swing.SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    new PanAndZoom(melhorCaminho, localidadeArrayList, hoteisArrayList);
-                }
-            });
+                        KmlFile kmlFile = new KmlFile();
+            kmlFile.criarArquivo(melhorCaminho, "Mapa 1");
 
-            KmlFile kmlFile = new KmlFile();
-            kmlFile.criarArquivo(melhorCaminho);
+//
+//            javax.swing.SwingUtilities.invokeLater(new Runnable() {
+//                public void run() {
+//                    new PanAndZoom(melhorCaminho, localidadeArrayList, hoteisArrayList);
+//                }
+//            });
+
 
 
         } catch (Exception e) {

@@ -8,18 +8,20 @@ public class Localidade {
     final private double x;
     final private double y;
     final private String nome;
-    final private Boolean hotel;
+    final public Boolean hotel;
     final private int qtdItensReceber;
+    final private int tempoDescarga;
     private Map<String, Double> feromonios;
     public boolean dormiu;
     
 
     private boolean recebeuEntrega = false;
     
-    public Localidade(String cityName, double x, double y, int qtdItensReceber, boolean hotel) {
+    public Localidade(String cityName, double x, double y, int qtdItensReceber, int tempoDescarga, boolean hotel) {
         this.nome = cityName;
         this.x = x;
         this.y = y;
+        this.tempoDescarga = tempoDescarga;
         feromonios = new HashMap<>();
         this.qtdItensReceber = qtdItensReceber;
         this.hotel = hotel;
@@ -40,6 +42,10 @@ public class Localidade {
     public int getQtdItensReceber() {
         return qtdItensReceber;
     }
+
+    public int getTempoDescarga() {
+        return tempoDescarga;
+    }
     
     public Double getFeromonio(String nomeCidade) {
         Double feromonio = this.feromonios.get(nomeCidade);
@@ -56,14 +62,14 @@ public class Localidade {
     public double calcularDistancia(Localidade proxLocalidade) {
         if (proxLocalidade == null) return 0;
         
-        return distance(getX(), proxLocalidade.getX(), getY(), proxLocalidade.getY(), 0, 0) / 1000;
+        return distance(getX(), proxLocalidade.getX(), getY(), proxLocalidade.getY());
     }
     
     private double distance(double lat1, double lat2, double lon1,
-                                  double lon2, double el1, double el2) {
+                                  double lon2) {
         
         final int R = 6371; // Radius of the earth
-        final double weight = 1.1;
+        final double weight = 1.2;
         
         double latDistance = Math.toRadians(lat2 - lat1);
         double lonDistance = Math.toRadians(lon2 - lon1);
@@ -71,13 +77,7 @@ public class Localidade {
                 + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
                 * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        double distance = R * c * 1000; // convert to meters
-        
-        double height = el1 - el2;
-        
-        distance = Math.pow(distance, 2) + Math.pow(height, 2);
-        
-        return Math.sqrt(distance) * weight;
+        return (R * c * weight); // convert to meters
     }
     
     public boolean recebeuEntrega() {
@@ -95,7 +95,7 @@ public class Localidade {
     }
     
     public Localidade copiar() {
-        return new Localidade(nome, x, y, qtdItensReceber, hotel);
+        return new Localidade(nome, x, y, qtdItensReceber, tempoDescarga, hotel);
     }
 
 

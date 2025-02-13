@@ -28,23 +28,25 @@ public class AntColonyOptimization {
     
     private final int interacoesMaximas;
 
-    public static final int custoCaminhao = 15000;
-    public static final double custoPoKm = 1.1;
+    public static final int custoCaminhao = 3000;
+    public static final double custoPoKm = 3.5;
     
     private final List<Localidade> localidades;
     private final List<Solucao> solucoes = new ArrayList<>();
     private final Random random = new Random();
+    private final String label;
     
     private List<Formiga> melhorCaminho;
     private double custoMelhorCaminho;
     
-    public AntColonyOptimization(double alpha, double beta, double evaporacao, double q, double fatorAleatoriedade, int interacoesMaximas, int qtdFormigas, List<Localidade> localidades, List<Localidade> hoteis) {
+    public AntColonyOptimization(double alpha, double beta, double evaporacao, double q, double fatorAleatoriedade, int interacoesMaximas, int qtdFormigas, List<Localidade> localidades, List<Localidade> hoteis, String label) {
         this.alpha = alpha;
         this.beta = beta;
         this.evaporacao = evaporacao;
         Q = q;
         this.fatorAleatoriedade = fatorAleatoriedade;
         this.interacoesMaximas = interacoesMaximas;
+        this.label = label;
         
         this.localidades = localidades;
         
@@ -65,44 +67,56 @@ public class AntColonyOptimization {
         
         return melhorCaminho;
     }
+
+    public double getCusto() {
+        ProgressBar pb = new ProgressBar("Iterações", interacoesMaximas);
+        pb.start();
+        for (int i = 1; i <= interacoesMaximas; i++) {
+            pb.step();
+            otimizar();
+        }
+        pb.stop();
+
+        return custoMelhorCaminho;
+    }
     
     public void exibirRelatorio() {
         
-//        StringBuilder caminho = new StringBuilder();
-//
-//        for (int i = 0; i < melhorCaminho.size(); i++) {
-//            Caminhao caminhao = melhorCaminho.get(i);
-//            caminho.append("\nCaminhão ").append(i + 1).append("\n");
-//            caminho.append(caminhao.getHistorico());
-//        }
-//
-//        caminho.append("\n").append("CUSTO TOTAL: ").append(custoMelhorCaminho);
-//
-//        System.out.println("\nMelhor caminho ordem: " + caminho);
+        StringBuilder caminho = new StringBuilder();
+        double distanciaTotal = 0;
+        for (int i = 0; i < melhorCaminho.size(); i++) {
+            Formiga formiga = melhorCaminho.get(i);
+            distanciaTotal += formiga.distanciaPercorrida;
+            caminho.append("\nCaminhão ").append(i + 1).append("\n");
+            caminho.append(formiga.getHistorico());
+        }
+
+        caminho.append("\n").append("DISTÂNCIA PERCORRIDA: ").append(distanciaTotal);
+        caminho.append("\n").append("CUSTO TOTAL: ").append(custoMelhorCaminho);
+
+        System.out.println("\nMelhor caminho " + label + caminho);
     }
     
     public void otimizar() {
         resetarFormigas();
-        limparFeromonioRotas();
-        moverFormigas();
-        atualizarFeromonioRotas();
+        encontrarSolucoes();
         autalizarMelhorSolucao();
     }
-    
+
     private void resetarFormigas() {
         for (Solucao solucao : solucoes) {
             solucao.limpar();
         }
     }
     
-    private void moverFormigas() {
+    private void encontrarSolucoes() {
         for (Solucao solucao : solucoes) {
             while (!solucao.finalizouPercurso()) {
                 solucao.utilizarNovaFormiga();
                 Viagem viagem = selecionarProximaViagem(solucao);
                 solucao.visitarLocalidade(viagem);
             }
-            
+            atualizarFeromonioRotas();
         }
     }
     
@@ -122,13 +136,20 @@ public class AntColonyOptimization {
             total += viagem.getProbabilidade();
             if (total >= r) return viagem;
         }
-        
+
         throw new RuntimeException("Não possui outras cidades " + possiveisLocalidades.size());
     }
     
     public void calcularProbabilidadeCidades(Solucao solucao, List<Viagem> possiveisViagens) {
         Localidade localidadeAtual = solucao.getUltimoCaminhao().getUltimaLocalidade();
         double totalFeromonio = 0.0;
+
+        if(possiveisViagens.size() == 1) {
+            Viagem viagem = possiveisViagens.get(0);
+            viagem.setProbabilidade(1.0);
+            return;
+        }
+
         for (Viagem viagem : possiveisViagens) {
             Localidade localidade = viagem.localidade;
             if (!solucao.visitouLocalidade(localidade)) {
@@ -141,9 +162,18 @@ public class AntColonyOptimization {
             Localidade localidade = viagem.localidade;
             if (solucao.visitouLocalidade(localidade)) viagem.setProbabilidade(0d);
             else {
-                double numerator = Math.pow(localidadeAtual.getFeromonio(localidade.getNome()), alpha) * Math.pow(1.0 / localidadeAtual.calcularDistancia(localidade), beta);
-                //System.out.println("numerador: " + numerator + " denominador " + totalFeromonio);
-                viagem.setProbabilidade(numerator / totalFeromonio);
+                double feromonio = localidadeAtual.getFeromonio(localidade.getNome());
+                double distancia = localidadeAtual.calcularDistancia(localidade);
+                double heuristica = Math.pow(1.0 /distancia , beta);
+                double numerator = Math.pow(feromonio, alpha) * heuristica;
+                double probabilidade = numerator / totalFeromonio;
+                if(Double.isNaN(probabilidade)) {
+                    System.out.println("Probabilidade inválida");
+                    viagem.setProbabilidade(0.0);
+                } else {
+                    viagem.setProbabilidade(probabilidade);
+                }
+
             }
         }
     }
@@ -175,18 +205,19 @@ public class AntColonyOptimization {
             melhorCaminho = solucoes.get(0).formigas;
             custoMelhorCaminho = calcularCusto(solucoes.get(0));
         }
-        
-        for (Solucao solucao : solucoes) {
-            double custo = calcularCusto(solucao);
+
+        for (Solucao s : solucoes) {
+            double custo = calcularCusto(s);
             if (custo < custoMelhorCaminho) {
                 custoMelhorCaminho = custo;
-                melhorCaminho = new ArrayList<>(solucao.formigas);
+                melhorCaminho = new ArrayList<>(s.formigas);
             }
         }
+
     }
 
     public static double calcularCusto(Solucao solucao) {
-        return (solucao.distanciaPercorrida() * custoPoKm) + (solucao.formigas.size() * custoCaminhao) ;
+        return (solucao.distanciaPercorrida() * custoPoKm);
     }
     
     private void limparFeromonioRotas() {
