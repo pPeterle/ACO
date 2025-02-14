@@ -180,14 +180,17 @@ public class AntColonyOptimization {
             
         }
         for (Solucao solucao : solucoes) {
-            double contribuicao = Q / solucao.distanciaPercorrida();
+            double contribuicaoPorKm = Q / solucao.distanciaPercorrida();
             for (Formiga formiga : solucao.formigas) {
                 for (int i = 0; i < formiga.cidadesVisitadas.size() - 1; i++) {
                     Localidade localidadeA = formiga.cidadesVisitadas.get(i);
                     Localidade localidadeB = formiga.cidadesVisitadas.get(i + 1);
                     
-                    if (localidadeB != null)
-                        localidadeA.setFeromonio(localidadeB.getNome(), localidadeA.getFeromonio(localidadeB.getNome()) * contribuicao);
+                    if (localidadeB != null) {
+                        double contribuicao = contribuicaoPorKm * localidadeA.calcularDistancia(localidadeB);
+                        localidadeA.setFeromonio(localidadeB.getNome(), localidadeA.getFeromonio(localidadeB.getNome()) + contribuicao);
+                    }
+
                 }
             }
         }

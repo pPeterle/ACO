@@ -69,7 +69,7 @@ public class Localidade {
                                   double lon2) {
         
         final int R = 6371; // Radius of the earth
-        final double weight = 1.2;
+        final double weight = 1.23;
         
         double latDistance = Math.toRadians(lat2 - lat1);
         double lonDistance = Math.toRadians(lon2 - lon1);

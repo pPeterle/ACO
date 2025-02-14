@@ -31,27 +31,24 @@ public class App {
 
             List<Callable<Void>> tasks = new ArrayList<>();
             List<Execucao> execucoes = new ArrayList();
-            execucoes.add(new Execucao(1.5, 2));
-            execucoes.add(new Execucao(2, 1.5));
-            execucoes.add(new Execucao(3, 4));
-            execucoes.add(new Execucao(4, 3));
-            execucoes.add(new Execucao(3, 6));
-            execucoes.add(new Execucao(6, 3));
-            execucoes.add(new Execucao(2, 10));
             execucoes.add(new Execucao(5, 15));
-            execucoes.add(new Execucao(6, 2));
-            execucoes.add(new Execucao(2, 6));
+            execucoes.add(new Execucao(5, 15));
+            execucoes.add(new Execucao(5, 15));
+            execucoes.add(new Execucao(5, 15));
+            execucoes.add(new Execucao(5, 15));
+            execucoes.add(new Execucao(5, 15));
+
 
             for (int i = 0; i < execucoes.size(); i++) {
                 Execucao execucao = execucoes.get(i);
                 int finalI = i;
 
-                CSVReader localidadesFile = new CSVReaderBuilder(new FileReader("src/main/files/Demanda 3.csv")).build();
+                CSVReader localidadesFile = new CSVReaderBuilder(new FileReader("src/main/files/Demanda 2.csv")).build();
                 List<String[]> localidadesString = localidadesFile.readAll();
 
                 List<Localidade> localidadeArrayList = localidadesString.stream()
                         .skip(2)
-                        .map(item -> new Localidade(item[0], Double.parseDouble(item[1]), Double.parseDouble(item[2]), Integer.parseInt(item[4]), Integer.parseInt(item[3]),false))
+                        .map(item -> new Localidade(item[0], Double.parseDouble(item[1]), Double.parseDouble(item[2]), Integer.parseInt(item[4 + finalI]), Integer.parseInt(item[3]),false))
                         .toList();
 
                 CSVReader hoteisCsv = new CSVReaderBuilder(new FileReader("src/main/files/Hoteis 2.csv")).build();
@@ -65,15 +62,15 @@ public class App {
                 List<Localidade> todasLocalidades = Stream.concat(localidadeArrayList.stream(), hoteisArrayList.stream()).toList();
 
 
-                AntColonyOptimization aco = new AntColonyOptimization(execucao.getA(), execucao.getB(), 0.85, 10000, 0.1, 1000, 1000, todasLocalidades, hoteisArrayList, Integer.toString(i + 1));
+                AntColonyOptimization aco = new AntColonyOptimization(execucao.getA(), execucao.getB(), 0.85, 10000, 0.1, 1000, 1500, todasLocalidades, hoteisArrayList, Integer.toString(finalI + 1));
 
                 tasks.add(new Callable<Void>() {
                     @Override
                     public Void call() throws Exception {
                         List<Formiga> melhorCaminho =  aco.comecarOtimizacao();
 
-//                        KmlFile kmlFile = new KmlFile();
-//                        kmlFile.criarArquivo(melhorCaminho, "Mapa " + (finalI + 1));
+                        KmlFile kmlFile = new KmlFile();
+                        kmlFile.criarArquivo(melhorCaminho, "Mapa " + (finalI + 1));
 
                         return null;
                     }

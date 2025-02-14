@@ -133,8 +133,6 @@ public class Formiga {
         if (proxLocalidade.recebeuEntrega() && !proxLocalidade.hotel) return new Viagem(proxLocalidade, TipoViagem.IMPOSSIVEL);
 
 
-
-
         boolean restricaoDeCarga = (qtdCarga + proxLocalidade.getQtdItensReceber()) <= maxCarga;
 
 
