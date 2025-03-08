@@ -101,6 +101,7 @@ public class AntColonyOptimization {
         resetarFormigas();
         encontrarSolucoes();
         autalizarMelhorSolucao();
+        limparFeromonioRotas();
     }
 
     private void resetarFormigas() {
@@ -150,19 +151,20 @@ public class AntColonyOptimization {
 
         for (Viagem viagem : possiveisViagens) {
             Localidade localidade = viagem.localidade;
-                Double feromonio = localidadeAtual.getFeromonio(localidade.getNome());
+                Double feromonio = localidadeAtual.getFeromonio(localidade);
+                if(feromonio.equals(0d)) feromonio = 1d;
                 double distancia = localidadeAtual.calcularDistancia(localidade);
                 totalFeromonio += Math.pow(feromonio, alpha) * Math.pow(1.0 / distancia, beta);
         }
         for (Viagem viagem : possiveisViagens) {
             Localidade localidade = viagem.localidade;
-                double feromonio = localidadeAtual.getFeromonio(localidade.getNome());
+                Double feromonio = localidadeAtual.getFeromonio(localidade);
+                if(feromonio.equals(0d)) feromonio = 1d;
                 double distancia = localidadeAtual.calcularDistancia(localidade);
                 double heuristica = Math.pow(1.0 /distancia , beta);
                 double numerator = Math.pow(feromonio, alpha) * heuristica;
                 double probabilidade = numerator / totalFeromonio;
                 if(Double.isNaN(probabilidade)) {
-                    System.out.println("Probabilidade inválida");
                     viagem.setProbabilidade(0.0);
                 } else {
                     viagem.setProbabilidade(probabilidade);
@@ -174,8 +176,8 @@ public class AntColonyOptimization {
     private void atualizarFeromonioRotas() {
         for (Localidade localidadeA : localidades) {
             for (Localidade localidadeB : localidades) {
-                double feromonioAtualizado = localidadeA.getFeromonio(localidadeB.getNome()) * (1 - evaporacao);
-                localidadeA.setFeromonio(localidadeB.getNome(), feromonioAtualizado);
+                double feromonioAtualizado = localidadeA.getFeromonio(localidadeB) * (1 - evaporacao);
+                localidadeA.setFeromonio(localidadeB, feromonioAtualizado);
             }
             
         }
@@ -188,7 +190,7 @@ public class AntColonyOptimization {
                     
                     if (localidadeB != null) {
                         double contribuicao = contribuicaoPorKm * localidadeA.calcularDistancia(localidadeB);
-                        localidadeA.setFeromonio(localidadeB.getNome(), localidadeA.getFeromonio(localidadeB.getNome()) + contribuicao);
+                        localidadeA.setFeromonio(localidadeB, localidadeA.getFeromonio(localidadeB) + contribuicao);
                     }
 
                 }

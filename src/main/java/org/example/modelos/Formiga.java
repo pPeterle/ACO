@@ -120,11 +120,11 @@ public class Formiga {
 
         Localidade deposito = this.cidadesVisitadas.get(0);
         Localidade localidadeAtual = this.cidadesVisitadas.get(this.cidadesVisitadas.size() - 1);
-        Localidade hotel = this.buscarHotelMaisProximo(proxLocalidade);
+
 
         double distanciaProxCidade = localidadeAtual.calcularDistancia(proxLocalidade);
         double distanciaVoltar = proxLocalidade.calcularDistancia(deposito);
-        double distanciaIrHotel = proxLocalidade.calcularDistancia(hotel);
+
 
         boolean podeVoltarPrimeiroDia = primeiroDia && jornadaDeTrabalhoDia1 > (distanciaProxCidade * velocidadeMediaKmPorMinuto);
         boolean podeVoltarSegundoDia = !primeiroDia && jornadaDeTrabalhoDia2 > (distanciaProxCidade * velocidadeMediaKmPorMinuto);
@@ -132,6 +132,8 @@ public class Formiga {
         if(proxLocalidade.getNome().equals("DEPÓSITO") && podeVoltarDeposito() && (podeVoltarSegundoDia || podeVoltarPrimeiroDia)) return new Viagem(proxLocalidade, TipoViagem.VIAGEM_ENTRE_CIDADES);
         if (proxLocalidade.recebeuEntrega() && !proxLocalidade.hotel) return new Viagem(proxLocalidade, TipoViagem.IMPOSSIVEL);
 
+        Localidade hotel = this.buscarHotelMaisProximo(proxLocalidade);
+        double distanciaIrHotel = proxLocalidade.calcularDistancia(hotel);
 
         boolean restricaoDeCarga = (qtdCarga + proxLocalidade.getQtdItensReceber()) <= maxCarga;
 

@@ -11,9 +11,9 @@ public class Localidade {
     final public Boolean hotel;
     final private int qtdItensReceber;
     final private int tempoDescarga;
+    final private Map<String, Double> distancias;
     private Map<String, Double> feromonios;
-    public boolean dormiu;
-    
+
 
     private boolean recebeuEntrega = false;
     
@@ -23,6 +23,7 @@ public class Localidade {
         this.y = y;
         this.tempoDescarga = tempoDescarga;
         feromonios = new HashMap<>();
+        distancias = new HashMap<>();
         this.qtdItensReceber = qtdItensReceber;
         this.hotel = hotel;
     }
@@ -47,22 +48,38 @@ public class Localidade {
         return tempoDescarga;
     }
     
-    public Double getFeromonio(String nomeCidade) {
-        Double feromonio = this.feromonios.get(nomeCidade);
-        
-        if (feromonio == null) return 1d;
-        
-        return feromonio;
+    public Double getFeromonio(Localidade localidade) {
+        Double feromonio = this.feromonios.get(localidade.getNome());
+
+        if(feromonio != null) return  feromonio;
+
+        return  0d;
     }
-    
-    public void setFeromonio(String nomeCidade, double feromonio) {
-        this.feromonios.put(nomeCidade, feromonio);
+
+    public void setFeromonio(Localidade localidade, double feromonio) {
+        Double feromonioAtual = this.feromonios.get(localidade.getNome());
+        if(feromonioAtual != null && feromonioAtual.equals(feromonio)) return;
+        this.feromonios.put(localidade.getNome(), feromonio);
+        localidade.setFeromonio(this, feromonio);
     }
-    
+
+    public void setDistancia(Localidade localidade, double distancia) {
+        if(this.distancias.get(localidade.getNome()) != null) return;
+        this.distancias.put(localidade.getNome(), distancia);
+        localidade.setDistancia(this, distancia);
+    }
+
+
     public double calcularDistancia(Localidade proxLocalidade) {
         if (proxLocalidade == null) return 0;
+
+        Double distanciaCache = this.distancias.get(proxLocalidade.getNome());
+        if(distanciaCache != null) return distanciaCache;
+
         
-        return distance(getX(), proxLocalidade.getX(), getY(), proxLocalidade.getY());
+        double distancia = distance(getX(), proxLocalidade.getX(), getY(), proxLocalidade.getY());
+        setDistancia(proxLocalidade, distancia);
+        return distancia;
     }
     
     private double distance(double lat1, double lat2, double lon1,

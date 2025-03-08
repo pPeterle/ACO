@@ -36,8 +36,6 @@ public class App {
             execucoes.add(new Execucao(5, 15));
             execucoes.add(new Execucao(5, 15));
             execucoes.add(new Execucao(5, 15));
-            execucoes.add(new Execucao(5, 15));
-
 
             for (int i = 0; i < execucoes.size(); i++) {
                 Execucao execucao = execucoes.get(i);
@@ -62,7 +60,7 @@ public class App {
                 List<Localidade> todasLocalidades = Stream.concat(localidadeArrayList.stream(), hoteisArrayList.stream()).toList();
 
 
-                AntColonyOptimization aco = new AntColonyOptimization(execucao.getA(), execucao.getB(), 0.85, 10000, 0.1, 1000, 1500, todasLocalidades, hoteisArrayList, Integer.toString(finalI + 1));
+                AntColonyOptimization aco = new AntColonyOptimization(execucao.getA(), execucao.getB(), 0.85, 10000, 0.1, 15000, 400, todasLocalidades, hoteisArrayList, Integer.toString(finalI + 1));
 
                 tasks.add(new Callable<Void>() {
                     @Override
@@ -96,7 +94,7 @@ public class App {
 //            System.out.println("Melhor resultado: \n\n\n\n");
 //            System.out.printf("O valor de alpha %f e o valor de beta %f teve o  menor custo %.2f com o tempo de %d \n", melhorResultado.getA(), melhorResultado.getB(),melhorResultado.getCustoTotal(), melhorResultado.getTempo() / 1000);
 
-
+//
 //                            CSVReader localidadesFile = new CSVReaderBuilder(new FileReader("src/main/files/Demanda 2.csv")).build();
 //                List<String[]> localidadesString = localidadesFile.readAll();
 //

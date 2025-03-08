@@ -97,7 +97,6 @@ public class Solucao {
     
     public List<Viagem> getPossiveisLocalidadesParaVisitar() {
         Formiga formiga = formigas.get(formigas.size() - 1);
-        Localidade ultimaLocalidade = formiga.getUltimaLocalidade();
         List<Viagem> possiveisLocalidades =  localidades.stream()
                 .filter(localidade -> !localidade.recebeuEntrega() || localidade.hotel || localidade.getNome().equals("DEPÓSITO"))
                 .map(formiga::podeVisitarCidade)

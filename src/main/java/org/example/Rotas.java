@@ -18,15 +18,17 @@ public class Rotas {
     public static void main(String[] args) {
         try {
 
+                int dia = 5;
+
                 CSVReader localidadesFile = new CSVReaderBuilder(new FileReader("src/main/files/Demanda 2.csv")).build();
                 List<String[]> localidadesString = localidadesFile.readAll();
 
                 List<Localidade> localidadeArrayList = localidadesString.stream()
                         .skip(2)
-                        .map(item -> new Localidade(item[0], Double.parseDouble(item[1]), Double.parseDouble(item[2]), Integer.parseInt(item[4]), 0,false))
+                        .map(item -> new Localidade(item[0], Double.parseDouble(item[1]), Double.parseDouble(item[2]), Integer.parseInt(item[4 + dia]), 0,false))
                         .toList();
 
-                CSVReader rotasFile = new CSVReaderBuilder(new FileReader("src/main/files/Rotas 2.csv")).build();
+                CSVReader rotasFile = new CSVReaderBuilder(new FileReader("src/main/files/Rotas 3.csv")).build();
                 List<String[]> rotasString = rotasFile.readAll();
 
                 ArrayList<ArrayList<Localidade>> caminhoes = new ArrayList<>();
@@ -34,19 +36,23 @@ public class Rotas {
                 rotasString.stream()
                         .skip(1)
                         .forEach(item -> {
-                            if(caminhoes.isEmpty()) {
-                                caminhoes.add(new ArrayList<>());
-                            }
-                            ArrayList<Localidade> localidadesVisitadas = caminhoes.get(caminhoes.size() - 1);
-                            Localidade localidade = localidadeArrayList.stream()
-                                    .filter(localidade1 -> localidade1.getNome().equals(item[2]))
-                                    .toList()
-                                    .get(0);
+                            System.out.println(item[0] + "  " + item[6 + dia]);
+                            if(item[6 + dia].equals("Sim")) {
+                                if(caminhoes.isEmpty()) {
+                                    caminhoes.add(new ArrayList<>());
+                                }
+                                ArrayList<Localidade> localidadesVisitadas = caminhoes.get(caminhoes.size() - 1);
+                                Localidade localidade = localidadeArrayList.stream()
+                                        .filter(localidade1 -> localidade1.getNome().equals(item[0]))
+                                        .toList()
+                                        .get(0);
 
-                            localidadesVisitadas.add(localidade);
-                            if(localidade.getNome().equals("DEPÓSITO") && localidadesVisitadas.size() > 1) {
-                                caminhoes.add(new ArrayList<>());
+                                localidadesVisitadas.add(localidade);
+                                if(localidade.getNome().equals("DEPÓSITO") && localidadesVisitadas.size() > 1) {
+                                    caminhoes.add(new ArrayList<>());
+                                }
                             }
+
                         });
 
                 List<Localidade> demanda = localidadeArrayList.stream().filter(localidade ->
@@ -77,7 +83,7 @@ public class Rotas {
                        throw new RuntimeException();
                    }
                 });
-            System.out.printf("Distância: %.3f ", distanciaTotal);
+            System.out.printf("Distância: %.2f ", distanciaTotal);
                 Double total = (distanciaTotal * AntColonyOptimization.custoPoKm);
                 System.out.printf("Resultado: %.3f", total);
 
